@@ -29,7 +29,7 @@ export default function Nav() {
 
   return (
     <nav className={`nav${hidden ? ' nav--hidden' : ''}`}>
-      <Link href="/" className="nav-logo">Rocio Abad</Link>
+      <Link href="/" className="nav-logo">Rocio Abad Mourente</Link>
       <ul className="nav-links">
         <li><Link href="/" className={pathname === '/' ? 'active' : ''}>Work</Link></li>
         <li><Link href="/about" className={pathname === '/about' ? 'active' : ''}>About</Link></li>
