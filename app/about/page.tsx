@@ -9,6 +9,8 @@ const clients = ['Google', 'Disney', 'NatGeo', 'Warner', 'Paramount', 'Mercadoli
 const services = ['Art Direction', 'Design', 'Agile']
 
 const experience = [
+  { years: '2024 – Present', company: 'Globant', role: 'Senior UX/UI Designer' },
+  { years: '2020 – 2024', company: 'HT-Shirts', role: 'Etsy / Shopify' },
   { years: '2020 – 2022', company: 'Nulinga', role: 'Head of Design' },
   { years: '2018', company: 'National Geographic', role: 'Project Manager & Visual Lead' },
   { years: '2016 – 2018', company: 'The Walt Disney Company', role: 'Lead Visual Designer' },
@@ -26,7 +28,7 @@ export default function About() {
         <div className="about-bio">
           <p>
             Madrid-based graphic designer, specialised in branding, typography and web design,
-            with 16 years of professional experience. Inspired by strong but simply executed
+            with 18 years of professional experience. Inspired by strong but simply executed
             concepts, my expertise covers diverse work both in print and digital media for a
             wide-range of clients.
           </p>
