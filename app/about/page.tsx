@@ -5,14 +5,14 @@ export const metadata: Metadata = {
   description: 'Graphic Designer based in Madrid with 16 years of experience in branding, typography and web design.',
 }
 
-const clients = ['Google', 'Disney', 'NatGeo', 'Warner', 'Paramount', 'Mercadolibre']
-const services = ['Art Direction', 'Design', 'Agile']
+const clients = ['Google', 'Disney', 'NatGeo', 'Globant', 'Mercadolibre', 'Warner', 'Paramount']
+const services = ['Art Direction', 'UX/UI Design', 'Branding', 'Design', 'Agile']
 
 const experience = [
   { years: '2024 – Present', company: 'Globant', role: 'Senior UX/UI Designer' },
   { years: '2020 – 2024', company: 'HT-Shirts', role: 'Etsy / Shopify' },
   { years: '2020 – 2022', company: 'Nulinga', role: 'Head of Design' },
-  { years: '2018 – 2018', company: 'National Geographic', role: 'Project Manager & Visual Lead' },
+  { years: '2018 – 2018', company: 'National Geographic', role: 'Project Manager & Visual Lead Designer' },
   { years: '2016 – 2018', company: 'The Walt Disney Company', role: 'Lead Visual Designer' },
   { years: '2011 – 2016', company: 'The Walt Disney Company', role: 'Senior Graphic Designer' },
   { years: '2010 – 2011', company: 'The Walt Disney Company', role: 'Graphic Designer' },
