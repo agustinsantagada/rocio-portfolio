@@ -20,7 +20,7 @@
 .label{font-family:var(--mono);font-weight:500;text-transform:uppercase;letter-spacing:.2em;}
 .title{font-family:var(--title);font-weight:100;text-transform:uppercase;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;}
-html,body{height:100%;}
+html,body{height:100%;margin:0;}
 body{
   font-family:'DM Sans',sans-serif;
   font-weight:300;
@@ -559,7 +559,7 @@ body,.prose,.prose p,.op-sec,.op-topbar,.svc-list li{font-family:'Bricolage Grot
 #services{background:#d8d3ce;color:#111;position:relative;overflow:hidden;padding-bottom:0;}
 #services .svc-title{font-family:var(--title);font-weight:700;font-size:clamp(48px,9vw,150px);line-height:.9;letter-spacing:-.02em;margin:0 0 clamp(20px,3.5vh,40px);}
 #services .svc-intro{font-family:var(--title);font-weight:500;font-size:clamp(18px,2vw,26px);line-height:1.5;max-width:26em;margin:0;color:#111;}
-.svc-fall{position:relative;width:100%;height:min(58vh,500px);margin-top:clamp(20px,4vh,44px);}
+.svc-fall{position:relative;width:100%;height:min(58vh,500px);margin-top:clamp(20px,4vh,44px);overflow:hidden;}
 .svc-pill{
   position:absolute;top:0;left:0;display:inline-flex;align-items:center;white-space:nowrap;
   padding:12px 26px;border-radius:999px;background:#fff;color:#111;
@@ -622,6 +622,25 @@ body,.prose,.prose p,.op-sec,.op-topbar,.svc-list li{font-family:'Bricolage Grot
 .sfade.vis{opacity:1;transform:none;}
 
 @media (prefers-reduced-motion:reduce){#hero{animation:none;} #hero .hero-scroll::after{animation:none;} .sfade{opacity:1 !important;transform:none !important;}}
+
+/* ============================= MOBILE ============================= */
+@media(max-width:700px){
+  /* hero: pink reaches the very top */
+  #hero{padding-top:0;}
+  /* services: taller area so the falling pills never cover the intro paragraph */
+  .svc-fall{height:min(72vh,560px);margin-top:clamp(40px,10vh,96px);}
+  /* project detail: white (no grey), less top distance, bigger home link */
+  #panel-project{background:#fff;}
+  #projectContent{padding-top:clamp(60px,11vh,94px);}
+  .back-wrap{top:clamp(15px,3vh,24px);}
+  .back{font-size:22px;}
+  /* keep page margins on mobile: no full-width break-out (text/content isn't cramped to the edge) */
+  #projectContent .proj-section.op-fw,
+  #projectContent.op-all-fw .proj-section:not(.scale-fit),
+  #projectContent .proj-section.mfw{margin-left:0 !important;margin-right:0 !important;width:auto !important;}
+  /* stack the two-column blocks: text below the title, with breathing room */
+  .proj-section:not(.scale-fit) .proj-cols2{grid-template-columns:1fr !important;gap:14px;}
+}
 
 </style>
 </head>
