@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rocio Abad — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;500&family=DM+Sans:wght@300;400&family=Major+Mono+Display&family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;500&family=Rubik:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Livvic:wght@100;200;300;400;500;600;700;900&family=Saira:wght@100..900&family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1e1e1e;
+  --ink-soft:#6f6f6f;
+  --line:rgba(30,30,30,.45);
+  --bg:#ffffff;
+  --ease:cubic-bezier(.22,.8,.24,1);
+  --title:'Saira Semi Condensed',sans-serif;
+  --mono:'DM Mono',monospace;
+}
+.label{font-family:var(--mono);font-weight:500;text-transform:uppercase;letter-spacing:.2em;}
+.title{font-family:var(--title);font-weight:100;text-transform:uppercase;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+html,body{height:100%;}
+body{
+  font-family:'DM Sans',sans-serif;
+  font-weight:300;
+  background:var(--bg);
+  color:var(--ink);
+  overflow-x:hidden;overflow-y:auto;
+  scroll-behavior:smooth;
+}
+body.detail-open{overflow:hidden;}
+a{color:inherit;text-decoration:none;cursor:pointer;}
+img{display:block;max-width:100%;}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  pointer-events:none;text-align:center;
+  transition:top .8s var(--ease),transform .8s var(--ease);
+}
+header a{
+  pointer-events:auto;
+  display:block;text-align:center;
+  font-family:'Saira',sans-serif;font-weight:100;text-transform:uppercase;
+  font-size:15px;letter-spacing:.3em;line-height:1;
+  padding:30px 0 20px;white-space:nowrap;
+  transition:font-size .8s var(--ease),letter-spacing .8s var(--ease),padding .8s var(--ease);
+}
+/* in-section: name framed as a chip (like the hamburger), no full-width bar */
+body.in-section header{
+  padding-top:clamp(16px,3vh,26px);
+}
+body.in-section header a{
+  display:inline-block;
+  padding:16px 30px;
+  background:rgba(255,255,255,.75);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border-radius:999px;
+  font-size:14px;letter-spacing:.28em;
+}
+/* home: name huge, centered, full device width */
+body:not(.in-section) header{
+  top:50%;transform:translateY(-50%);
+}
+body:not(.in-section) header a{
+  font-size:12.8vw;letter-spacing:.015em;padding:0;
+}
+header a em{font-style:normal;font-weight:300;}
+
+/* ---------- home menu (horizontal, just below the name) ---------- */
+nav.home-menu{
+  position:fixed;left:0;right:0;top:50%;bottom:auto;z-index:110;
+  transform:translateY(calc(6.4vw + 40px));
+  display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:baseline;
+  gap:clamp(16px,3vw,46px);
+  pointer-events:none;                 /* only the links catch clicks, not the full-width strip */
+  transition:opacity .5s var(--ease),transform .5s var(--ease);
+}
+nav.home-menu a{
+  pointer-events:auto;
+  font-family:'Saira',sans-serif;font-weight:100;text-transform:uppercase;
+  font-size:clamp(15px,1.55vw,21px);line-height:1;letter-spacing:.14em;
+  padding:6px 2px;position:relative;
+  transition:opacity .35s var(--ease);
+}
+nav.home-menu a:hover{opacity:.55;}
+body.in-section nav.home-menu{opacity:0;transform:translateY(calc(6.4vw + 66px));pointer-events:none;}
+
+/* ---------- top-left HUD: location · time · temperature ---------- */
+.hud{
+  position:fixed;top:clamp(16px,3vh,26px);left:clamp(16px,3.4vw,44px);z-index:101;
+  display:flex;flex-direction:column;gap:1px;pointer-events:none;
+  font-family:'Saira',sans-serif;font-weight:100;
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;line-height:1.4;
+  color:var(--ink-soft);
+}
+.hud .hud-temp{opacity:.7;}
+
+/* ---------- hamburger (bottom center) ---------- */
+.burger{
+  position:fixed;left:50%;bottom:clamp(28px,6vh,64px);transform:translateX(-50%);z-index:96;
+  width:58px;height:58px;border:0;cursor:pointer;
+  background:rgba(255,255,255,.75);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border-radius:50%;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:9px;
+  padding:0;
+  opacity:0;pointer-events:none;transition:opacity .5s var(--ease);
+}
+.burger span{width:34px;}
+.burger span{display:block;height:0;border-top:1px solid var(--ink);transition:transform .4s var(--ease);}
+body.in-section .burger{opacity:1;pointer-events:auto;}
+.burger:hover span:first-child{transform:translateY(-2px);}
+.burger:hover span:last-child{transform:translateY(2px);}
+
+/* ---------- fullscreen overlay menu (slides up from bottom) ---------- */
+.overlay{
+  position:fixed;inset:0;z-index:95;background:var(--bg);
+  transform:translateY(100%);
+  transition:transform .65s var(--ease);
+  display:flex;align-items:center;justify-content:center;
+}
+.overlay.open{transform:translateY(0);}
+.overlay nav{display:flex;flex-direction:column;align-items:center;text-align:center;}
+.overlay nav a{
+  font-family:var(--title);font-weight:100;text-transform:uppercase;
+  font-size:clamp(52px,9vw,120px);line-height:1.05;
+  padding:8px 0;transition:letter-spacing .35s var(--ease),color .3s;
+}
+.overlay nav a:hover{color:var(--ink-soft);}
+.overlay nav a.current{color:var(--ink-soft);}
+.overlay .close{
+  position:absolute;top:34px;right:clamp(20px,3.4vw,44px);
+  width:30px;height:30px;background:none;border:0;cursor:pointer;
+}
+.overlay .close::before,.overlay .close::after{
+  content:'';position:absolute;left:0;top:50%;width:100%;height:0;border-top:1px solid var(--ink);
+}
+.overlay .close::before{transform:rotate(45deg);}
+.overlay .close::after{transform:rotate(-45deg);}
+
+/* ---------- panels (sections) ---------- */
+.panel{
+  position:fixed;inset:0;z-index:40;background:var(--bg);
+  overflow-y:auto;overflow-x:hidden;
+  opacity:0;pointer-events:none;
+  transform:translateY(10vh) scale(.965);
+  transition:opacity .75s var(--ease),transform .75s var(--ease);
+  padding:120px clamp(24px,5vw,72px) 140px;
+}
+.panel.active{opacity:1;pointer-events:auto;transform:none;}
+/* project detail: light-grey side margins, white content column reaching the top */
+#panel-project{background:#f1f1f1;padding-top:0;}
+#projectContent{background:#fff;padding-top:clamp(150px,18vh,240px);box-sizing:border-box;}
+/* per-project bottom white space */
+#projectContent.op-pad-more{padding-bottom:clamp(150px,22vh,260px);}
+#projectContent.op-pad-less .proj-section:last-child{margin-bottom:8px !important;}
+/* square (no rounded-corner) sections span the full project page width; rounded ones keep the page margin.
+   The .op-fw class is assigned in JS by inspecting each section's border-radius. */
+#projectContent .proj-section.op-fw,
+#projectContent.op-all-fw .proj-section:not(.scale-fit){width:auto;margin-left:calc(var(--pgpad,38px) * -1);margin-right:calc(var(--pgpad,38px) * -1);}
+#projectContent .proj-section.op-fw > h3,
+#projectContent .proj-section.op-fw > .ed-eyebrow,
+#projectContent .proj-section.op-fw > .proj-desc{padding-left:var(--pgpad,38px);padding-right:var(--pgpad,38px);}
+/* single full-width image: show it whole (never crop) */
+#projectContent .op-fill .content-grid,#projectContent .op-fill .img-grid.dyn{grid-auto-rows:auto !important;}
+#projectContent .op-fill .content-grid .gcard{grid-row:auto !important;}
+#projectContent .op-fill .content-grid .gcard.has-img img,
+#projectContent .op-fill .img-grid.dyn > img{height:auto !important;object-fit:contain !important;grid-row:auto !important;}
+/* bottom prev / next project arrows */
+.proj-nav{display:flex;justify-content:center;align-items:center;gap:clamp(30px,6vw,80px);padding:clamp(34px,6vh,72px) 0 clamp(44px,8vh,100px);}
+.proj-nav .pn{width:52px;height:52px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(0,0,0,.18);color:#111;cursor:pointer;transition:background .3s var(--ease),color .3s,transform .3s var(--ease);}
+.proj-nav .pn:hover{background:#111;color:#fff;transform:translateY(-2px);}
+.proj-nav .pn svg{width:22px;height:22px;display:block;}
+/* scroll-reveal: sections fade + rise as they enter the viewport */
+.reveal{opacity:0;transform:translateY(38px);transition:opacity .75s var(--ease),transform .75s var(--ease);will-change:opacity,transform;}
+.reveal.in{opacity:1;transform:none;}
+/* projects: rise up from below, staggered by column for a parallax-like entrance */
+.grid .cell.reveal{transform:translateY(90px);transition:opacity .9s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s);}
+.grid .cell.reveal.in{transform:none;}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1 !important;transform:none !important;transition:none !important;}.grid .cell.reveal{transform:none !important;transition:none !important;}}
+.panel::-webkit-scrollbar{width:0;}
+
+/* max content width on large monitors */
+.section-label,.grid,#projectContent,.back-wrap{
+  max-width:1240px;margin-left:auto;margin-right:auto;
+}
+
+.section-label{
+  font-family:var(--mono);font-weight:500;
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+  margin-bottom:clamp(36px,6vh,72px);
+  text-align:center;
+}
+
+/* ---------- dynamic grid ---------- */
+.grid-row{
+  display:flex;align-items:flex-start;
+  gap:clamp(18px,3vw,48px);
+  margin-bottom:clamp(50px,8vw,110px);
+}
+.grid-row .cell{position:relative;}
+.thumb{display:block;cursor:pointer;position:relative;}
+.thumb .ph{
+  width:100%;overflow:hidden;
+  transition:transform .5s var(--ease);
+}
+/* rounded corners for UX/UI and Design project buttons */
+#panel-ux .thumb .ph,#panel-design .thumb .ph{border-radius:10px;transform:translateZ(0);isolation:isolate;}
+#panel-ux .thumb .ph-inner,#panel-ux .thumb img.ph-inner,
+#panel-design .thumb .ph-inner,#panel-design .thumb img.ph-inner{border-radius:10px;}
+.thumb:hover .ph{transform:scale(1.03);}
+.thumb .ph-inner{width:100%;height:100%;transition:transform .8s var(--ease),opacity .4s var(--ease);will-change:transform;}
+.thumb:hover .ph-inner{opacity:.45;}
+.thumb figcaption{
+  position:absolute;left:18px;bottom:16px;z-index:2;margin:0;pointer-events:none;
+  display:flex;align-items:baseline;gap:10px;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .4s var(--ease),transform .4s var(--ease);
+}
+.thumb:hover figcaption{opacity:1;transform:none;}
+.thumb figcaption .num{font-family:var(--mono);font-weight:300;font-size:11px;color:var(--ink-soft);letter-spacing:.15em;}
+.thumb figcaption .t{font-family:var(--title);font-weight:100;text-transform:uppercase;font-size:18px;letter-spacing:.1em;}
+.proj-head h2 .tr,.thumb figcaption .t .tr{font-weight:300;}
+
+/* real images (fallback to gray tone if missing) */
+.img{background-size:cover;background-position:center;background-repeat:no-repeat;}
+/* thumbnails: natural image proportion */
+.thumb img.ph-inner{width:100%;height:auto;}
+.thumb .ph-inner.img{background-size:contain;background-color:#0a0a0a;background-image:none;}
+
+/* UX/UI & Design: uniform avatar cards — same size, aligned in a neat 3-col grid,
+   with the subtle scroll-parallax preserved (image is oversized so it can drift) */
+#panel-ux .grid-row,#panel-design .grid-row{
+  display:grid;grid-template-columns:repeat(3,1fr);align-items:start;
+}
+#panel-ux .grid-row .cell,#panel-design .grid-row .cell{margin-top:0 !important;}
+#panel-ux .thumb .ph,#panel-design .thumb .ph{
+  position:relative;aspect-ratio:4/3 !important;height:auto;
+}
+#panel-ux .thumb .ph-inner,#panel-design .thumb .ph-inner,
+#panel-ux .thumb img.ph-inner,#panel-design .thumb img.ph-inner{
+  position:absolute;top:-20%;left:0;width:100%;height:140%;object-fit:cover;
+  background-size:cover;background-color:transparent;
+}
+@media(max-width:640px){
+  #panel-ux .grid-row,#panel-design .grid-row{display:block;grid-template-columns:none;}
+  #panel-ux .thumb .ph,#panel-design .thumb .ph{aspect-ratio:4/3 !important;}
+}
+
+/* placeholder tones */
+.tone-1{background:#ececec;}
+.tone-2{background:#e2e2e2;}
+.tone-3{background:#d8d8d8;}
+.tone-4{background:linear-gradient(135deg,#ececec,#d4d4d4);}
+.tone-5{background:linear-gradient(180deg,#e8e8e8,#dcdcdc);}
+.tone-6{background:linear-gradient(160deg,#f0f0f0,#dedede 70%);}
+
+/* ---------- about / contact ---------- */
+.prose{max-width:760px;}
+.prose h2{font-family:var(--title);font-weight:100;text-transform:uppercase;font-size:clamp(30px,4.4vw,56px);line-height:1.2;margin-bottom:34px;}
+.prose p{font-size:clamp(16px,1.4vw,19px);line-height:1.75;color:#3a3a3a;margin-bottom:22px;}
+.prose .meta{margin-top:56px;display:flex;flex-wrap:wrap;gap:56px;}
+.prose .meta div h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px;font-weight:500;}
+.prose .meta div p{font-family:'Saira',sans-serif;font-size:17px;font-weight:300;line-height:1.9;margin:0;}
+/* about: container centered, content left-aligned */
+#panel-about .prose{margin-left:auto;margin-right:auto;text-align:left;}
+#panel-about .exp{margin-left:auto;margin-right:auto;}
+/* work experience */
+.exp{margin-top:clamp(56px,9vh,96px);max-width:760px;}
+.exp h3{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:22px;}
+.exp-row{display:grid;grid-template-columns:150px 1fr 1fr;gap:20px;align-items:baseline;padding:16px 0;border-top:.5px solid var(--line);}
+.exp-row:last-child{border-bottom:.5px solid var(--line);}
+.exp-date,.exp-role{font-family:var(--mono);font-weight:300;font-size:12px;letter-spacing:.05em;color:var(--ink-soft);}
+.exp-company{font-family:'Saira',sans-serif;font-size:18px;font-weight:400;}
+@media (max-width:640px){.exp-row{grid-template-columns:1fr;gap:4px;}}
+/* contact: centered in the middle of the page */
+#panel-contact{display:flex;flex-direction:column;}
+#panel-contact .section-label{width:100%;flex:0 0 auto;}
+.contact-mid{margin:auto;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.contact-big{font-family:var(--title);font-weight:100;text-transform:uppercase;font-size:clamp(28px,4.6vw,58px);line-height:1.2;display:inline-block;margin-bottom:34px;transition:letter-spacing .35s var(--ease);}
+.contact-big:hover{letter-spacing:.04em;}
+.socials{display:flex;gap:0;align-items:center;justify-content:center;}
+.socials a{font-family:var(--mono);font-weight:300;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:0 18px;transition:color .3s;}
+.socials a:hover{color:var(--ink-soft);}
+.socials .sep{width:0;height:14px;border-left:.5px solid var(--line);}
+
+/* ---------- project detail ---------- */
+/* home link: "Rocío Abad", centred at the very top, scrolls away with the page */
+.back-wrap{position:absolute;top:clamp(30px,5vh,60px);left:0;right:0;z-index:60;display:flex;justify-content:center;pointer-events:none;max-width:none;margin:0;}
+.back{
+  pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;margin:0;
+  font-family:var(--title);font-weight:600;text-transform:none;
+  font-size:clamp(15px,1.5vw,19px);letter-spacing:-.01em;color:#111;
+  transition:opacity .3s var(--ease);
+}
+.back:hover{opacity:.55;}
+.proj-head{display:none;}  /* title + year + project type hidden in the detail view */
+.proj-head .roles{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;}
+.proj-head .roles span{font-family:var(--mono);font-weight:300;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);padding:0 4px;}
+.proj-head .roles .sep{width:0;height:11px;border-left:.5px solid var(--line);padding:0;}
+.hero{width:100%;aspect-ratio:16/8;margin-bottom:clamp(50px,8vh,90px);}
+.proj-desc{max-width:680px;margin:clamp(36px,6vh,72px) auto;}
+.proj-desc p{font-size:clamp(16px,1.4vw,19px);line-height:1.8;color:#3a3a3a;margin-bottom:20px;}
+.proj-desc p:last-child{margin-bottom:0;}
+.proj-section{margin-bottom:clamp(70px,11vh,130px);}
+.proj-section.hasbg{padding:var(--secpad,clamp(26px,4.5vw,60px));border-radius:16px;}
+.proj-cols2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);max-width:none;margin:0 auto;align-items:start;}
+.proj-cols2 .proj-desc{max-width:none;margin:0;}
+.proj-cols2 h3{margin-bottom:14px;}
+@media(max-width:640px){.proj-section:not(.scale-fit) .proj-cols2{grid-template-columns:1fr;gap:22px;}}
+/* content grid / bento (text cards) */
+.content-grid{display:grid;gap:clamp(8px,1.4vw,16px);grid-auto-rows:var(--rh,160px);grid-auto-flow:dense;max-width:none;margin:0 auto;}
+.content-grid .gcard{padding:clamp(16px,2vw,30px);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;}
+.content-grid .gcard h3{font-family:'DM Sans',sans-serif;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 12px;}
+.content-grid .gcard p{font-size:16px;line-height:1.65;color:#3a3a3a;margin:0;}
+.content-grid .gcard.has-img{padding:0;}
+.content-grid .gcard.has-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.embed-frame{width:100%;border:0;display:block;background:transparent;overflow:hidden;}
+@media(max-width:640px){.proj-section:not(.scale-fit) .content-grid{grid-template-columns:1fr !important;grid-auto-rows:auto;}.proj-section:not(.scale-fit) .content-grid .gcard{grid-column:span 1 !important;grid-row:span 1 !important;}}
+.proj-section:has(+ .proj-section.cont){margin-bottom:0;}
+.proj-section h3{
+  font-family:'DM Sans',sans-serif;font-weight:500;
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+  margin-bottom:34px;
+}
+.img-grid{display:grid;gap:0;}
+/* lands: dynamic composition */
+.lands-row{display:flex;gap:clamp(14px,2.4vw,36px);justify-content:space-between;align-items:flex-start;margin-bottom:clamp(20px,3.5vw,48px);}
+.lands-row img{display:block;height:auto;}
+@media (max-width:760px){
+  .lands-row{display:block;}
+  .lands-row img{width:100% !important;margin:0 0 14px !important;}
+}
+.img-grid .ph{width:100%;}
+/* dynamic (bento) grid: per-image column/row spans */
+.img-grid.dyn{gap:clamp(8px,1.4vw,16px);grid-auto-rows:var(--rh,220px);grid-auto-flow:dense;}
+.img-grid.dyn img{width:100%;height:100%;object-fit:cover;display:block;}
+/* bento on mobile: stack to one column at natural height (no thin/tall crops) */
+/* tablets (incl. iPad portrait ~768-834px): trim side margins */
+@media (max-width:960px){
+  .panel{padding-left:26px;padding-right:26px;}
+  .proj-section.hasbg:not(.mfw):not(.scale-fit):not([style*="--secpad"]){padding:30px 24px;}
+  /* explicit per-section responsive columns (also covers iPad) */
+  .proj-section:not(.scale-fit) .img-grid.m1,.proj-section:not(.scale-fit) .content-grid.m1{grid-template-columns:1fr !important;grid-auto-rows:auto !important;}
+  .proj-section:not(.scale-fit) .img-grid.m2,.proj-section:not(.scale-fit) .content-grid.m2{grid-template-columns:1fr 1fr !important;}
+  .proj-section:not(.scale-fit) .img-grid.m1 > *,.proj-section:not(.scale-fit) .img-grid.m2 > *,.proj-section:not(.scale-fit) .content-grid.m1 > *,.proj-section:not(.scale-fit) .content-grid.m2 > *{grid-column:auto !important;}
+  .proj-section:not(.scale-fit) .img-grid.m1 > img,.proj-section:not(.scale-fit) .img-grid.m2 > img{grid-row:auto !important;height:auto !important;object-fit:contain !important;}
+  .proj-section:not(.scale-fit) .content-grid.m1 > .gcard,.proj-section:not(.scale-fit) .content-grid.m2 > .gcard{grid-row:auto !important;}
+  /* section set to 1-col mobile -> break out of padding, edge-to-edge full width */
+  .proj-section.mfw{width:100vw;margin-left:calc(50% - 50vw);padding-left:0 !important;padding-right:0 !important;border-radius:0 !important;}
+  .proj-section.mfw > h3,.proj-section.mfw > .ed-eyebrow,.proj-section.mfw > .proj-desc{padding-left:16px;padding-right:16px;}
+}
+@media (max-width:700px){
+  .proj-section:not(.scale-fit) .img-grid.dyn{grid-template-columns:1fr !important;grid-auto-rows:auto !important;}
+  .proj-section:not(.scale-fit) .img-grid.dyn > img{grid-column:auto !important;grid-row:auto !important;height:auto !important;object-fit:contain !important;}
+  .proj-section:not(.scale-fit) .img-grid.dyn > div{grid-column:auto !important;grid-row:auto !important;min-height:40px;}
+  /* less side margin on phones: tighten panel + colored-section padding */
+  .panel{padding-left:16px;padding-right:16px;}
+  .proj-section.hasbg:not(.mfw):not(.scale-fit):not([style*="--secpad"]){padding:20px 16px;}
+}
+.cols-2{grid-template-columns:repeat(2,1fr);}
+.cols-3{grid-template-columns:repeat(3,1fr);}
+.cols-4{grid-template-columns:repeat(4,1fr);}
+
+@media (max-width:760px){
+  /* one project per line, compact & centered */
+  .grid-row{display:block;margin-bottom:0;}
+  .grid-row .cell{margin:0 auto 16px !important;width:84% !important;}
+  .section-label{text-align:center;}
+  .proj-section:not(.scale-fit) .cols-3,.proj-section:not(.scale-fit) .cols-4{grid-template-columns:repeat(2,1fr);}
+  .proj-head .roles span{padding:0 6px;font-size:11px;}
+  .proj-section h3::after{display:none;}
+}
+
+/* ---------- semantic colors (design system) ---------- */
+.sem-colors{margin-top:clamp(30px,5vh,60px);}
+.sem-head{margin-bottom:clamp(28px,4.5vh,52px);}
+.sem-head h4{font-family:var(--title);font-weight:100;text-transform:uppercase;font-size:clamp(24px,3vw,38px);letter-spacing:.04em;margin-bottom:14px;}
+.sem-head p{max-width:520px;font-size:15px;line-height:1.6;color:var(--ink-soft);}
+.sc-row{display:grid;grid-template-columns:minmax(190px,250px) 1fr;gap:clamp(22px,3vw,48px);padding:clamp(26px,4vh,42px) 0;border-top:.5px solid var(--line);align-items:start;}
+.sc-info h4{font-family:var(--title);font-weight:100;text-transform:uppercase;font-size:22px;letter-spacing:.05em;margin-bottom:14px;}
+.sc-info p{font-size:13.5px;line-height:1.65;color:var(--ink-soft);}
+.sc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.sc-card{border-radius:11px;padding:11px 11px 13px;min-height:118px;display:flex;flex-direction:column;justify-content:space-between;font-family:var(--mono);}
+.sc-badge{display:flex;align-items:center;gap:6px;font-size:9.5px;font-weight:500;letter-spacing:.02em;}
+.sc-ico{width:11px;height:11px;border-radius:50%;border:1px solid currentColor;background:linear-gradient(90deg,currentColor 0 50%,transparent 50% 100%);flex:0 0 auto;}
+.sc-hexrow{display:flex;justify-content:space-between;align-items:baseline;gap:6px;font-size:10.5px;font-weight:500;margin-bottom:5px;}
+.sc-tag{font-size:8.5px;letter-spacing:.07em;opacity:.85;text-align:right;white-space:nowrap;}
+.sc-sub{font-size:8.5px;line-height:1.5;letter-spacing:.01em;}
+.sc-token{word-break:break-all;margin-top:2px;}
+@media (max-width:1000px){.proj-section:not(.scale-fit) .sc-grid{grid-template-columns:repeat(3,1fr);}}
+@media (max-width:760px){
+  .proj-section:not(.scale-fit) .sc-row{grid-template-columns:1fr;gap:16px;}
+  .proj-section:not(.scale-fit) .sc-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:420px){.proj-section:not(.scale-fit) .sc-grid{grid-template-columns:1fr;}}
+
+/* ---------- typography tokens (design system) ---------- */
+.type-tokens{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,90px);margin-top:clamp(40px,6vh,72px);padding-top:clamp(32px,5vh,56px);border-top:.5px solid var(--line);}
+.type-block h4{font-family:var(--title);font-weight:100;text-transform:uppercase;font-size:clamp(20px,2.4vw,30px);letter-spacing:.04em;margin-bottom:22px;}
+.type-table{width:100%;border-collapse:collapse;}
+.type-table th{font-family:var(--mono);font-weight:300;font-size:10.5px;letter-spacing:.06em;color:var(--ink-soft);text-align:left;padding:0 12px 12px 0;}
+.type-table thead th{border-bottom:2px solid var(--line);}
+.type-table td{padding:13px 12px 13px 0;border-top:.5px solid rgba(30,30,30,.14);font-size:14px;line-height:1.4;vertical-align:top;}
+.type-table td:last-child,.type-table th:last-child{padding-right:0;}
+.type-token{font-family:var(--mono);font-weight:500;color:var(--ink);}
+.type-val{color:#3a3a3a;}
+@media (max-width:760px){
+  .proj-section:not(.scale-fit) .type-tokens{grid-template-columns:1fr;gap:44px;}
+}
+
+/* ---------- six flags full design system ---------- */
+.ds-section{margin-top:clamp(28px,5vh,56px);}
+.ds-section + .ds-section{margin-top:clamp(50px,9vh,110px);}
+.ds-title{font-family:var(--title);font-weight:100;text-transform:uppercase;font-size:clamp(24px,3.4vw,42px);letter-spacing:.04em;margin-bottom:10px;}
+.ds-intro{max-width:600px;font-size:14.5px;line-height:1.6;color:var(--ink-soft);margin-bottom:clamp(22px,4vh,42px);}
+.ds-row{display:grid;grid-template-columns:minmax(150px,215px) 1fr;gap:clamp(18px,3vw,44px);padding:clamp(20px,3.5vh,36px) 0;border-top:.5px solid var(--line);align-items:start;}
+.ds-row .sc-info h4{font-family:var(--title);font-weight:100;text-transform:uppercase;font-size:20px;letter-spacing:.05em;margin-bottom:12px;}
+.ds-row .sc-info p{font-size:12.5px;line-height:1.6;color:var(--ink-soft);}
+.ds-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;}
+.sf-chip{aspect-ratio:1/1;border-radius:8px;display:flex;align-items:flex-end;padding:8px;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.01em;}
+/* typography rendered like the color section (ds-row) */
+.type-face{font-family:'Saira',sans-serif;font-size:clamp(20px,2.4vw,30px);font-weight:300;color:var(--ink);padding:14px 0;border-top:.5px solid rgba(30,30,30,.12);display:flex;flex-direction:column;gap:5px;}
+.type-face .type-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:500;}
+.type-wgt{font-family:var(--mono);font-size:11px;color:var(--ink-soft);padding:10px 0;border-top:.5px solid rgba(30,30,30,.12);display:flex;flex-direction:column;gap:2px;}
+.type-wgt b{color:var(--ink);font-size:15px;font-weight:500;}
+.proj-section .ed-eyebrow{font-family:'DM Mono',monospace;font-weight:500;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 8px;}
+/* typography specimens */
+.ds-type-row{padding:clamp(24px,4.5vh,46px) 0;border-top:.5px solid var(--line);}
+.ds-type-row .lbl{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px;}
+.ds-type-name{font-size:clamp(38px,7vw,82px);line-height:1;margin-bottom:20px;font-weight:300;}
+.ds-type-spec{font-size:clamp(17px,2.3vw,25px);line-height:1.55;color:#3a3a3a;word-break:break-word;}
+/* user persona component */
+.ap,.ap *{box-sizing:border-box;}
+.ap{--pk:#6d28d9;--pk-d:#4c1d95;color:#1c1633;border-radius:22px;overflow:hidden;font-family:'DM Sans',sans-serif;background:var(--apbg,linear-gradient(135deg,#efe7f8 0%,#e6d6f4 55%,#e9dcf3 100%));border:1px solid #e0d3f2;}
+.ap__top{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.9fr);gap:clamp(24px,3vw,48px);padding:clamp(26px,4vw,52px);}
+.ap__eyebrow{margin:0 0 18px;font-size:13px;font-weight:600;letter-spacing:.04em;}
+.ap__title{margin:0;font-size:clamp(30px,4.6vw,56px);line-height:1.03;letter-spacing:-.03em;font-weight:800;}
+.ap__sub{margin:24px 0;font-size:clamp(15px,1.5vw,18px);font-weight:700;}
+.ap__pills{display:flex;flex-wrap:wrap;gap:24px;}
+.ap__pilllbl{display:block;font-size:12px;font-weight:700;color:var(--pk);margin-bottom:9px;}
+.ap__pill{display:inline-block;padding:8px 18px;border-radius:999px;background:var(--pk);color:#fff;font-size:13px;font-weight:700;}
+.ap__people{display:flex;flex-direction:column;gap:clamp(14px,2vw,24px);border-left:1px solid rgba(28,22,51,.14);padding-left:clamp(20px,2.5vw,40px);}
+.ap__avatars{display:flex;flex-wrap:wrap;gap:clamp(6px,1vw,12px);}
+.ap__ava{position:relative;width:clamp(56px,7vw,84px);aspect-ratio:1;border-radius:50%;overflow:hidden;border:4px solid #fff;box-shadow:0 8px 22px rgba(76,29,149,.16);display:grid;place-items:center;background:var(--ava,linear-gradient(150deg,#b89ae6,#8a63d6));}
+.ap__ava img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.ap__ava span{font-size:clamp(18px,2.4vw,34px);font-weight:800;color:#fff;opacity:.92;}
+.ap__names{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:clamp(10px,1.4vw,20px);}
+.ap__person h4{margin:0 0 3px;font-size:clamp(17px,1.8vw,24px);font-weight:800;letter-spacing:-.01em;}
+.ap__age{display:block;font-size:12.5px;color:#5b5470;margin-bottom:10px;}
+.ap__person p{margin:0;font-size:13px;line-height:1.5;color:#3b3550;}
+.ap__bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(28px,4vw,64px);padding:clamp(26px,4vw,52px);background:var(--apbg2,linear-gradient(120deg,#f0e9d9 0%,#ece1f2 55%,#e8dbf3 100%));}
+.ap__h3{margin:0 0 20px;font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#2a2350;}
+.ap__cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;}
+.ap__card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 8px 22px rgba(76,29,149,.08);}
+.ap__card-lbl{display:block;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--pk);margin-bottom:12px;}
+.ap__card p{margin:0;font-size:13px;line-height:1.5;color:#3b3550;}
+.ap__intgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.ap__int{display:flex;align-items:center;gap:11px;}
+.ap__int-ico{flex:0 0 auto;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--pk),var(--pk-d));box-shadow:0 0 0 4px rgba(109,40,217,.14);}
+.ap__int p{margin:0;font-size:13px;line-height:1.4;color:#2a2350;font-weight:600;}
+@media (max-width:760px){.proj-section:not(.scale-fit) .ap__top,.proj-section:not(.scale-fit) .ap__bottom{grid-template-columns:1fr;}.proj-section:not(.scale-fit) .ap__people{border-left:0;padding-left:0;border-top:1px solid rgba(28,22,51,.14);padding-top:20px;}.proj-section:not(.scale-fit) .ap__intgrid{grid-template-columns:1fr;}}
+@media (max-width:760px){
+  .ds-row{grid-template-columns:1fr;gap:14px;}
+  .ds-grid{grid-template-columns:repeat(auto-fill,minmax(70px,1fr));}
+}
+
+/* =================================================================
+   ONE-PAGE SCROLL SITE (hero · about · work · services · next · footer)
+   ================================================================= */
+:root{
+  --pink:#ffa4d2; --orange:#ff9d59; --cream:#faf5ef; --line2:rgba(20,20,20,.12);
+  /* everything now uses Bricolage Grotesque */
+  --title:'Bricolage Grotesque',sans-serif;
+  --mono:'Bricolage Grotesque',sans-serif;
+}
+body,.prose,.prose p,.op-sec,.op-topbar,.svc-list li{font-family:'Bricolage Grotesque',sans-serif;}
+.op-topbar{
+  position:fixed;top:0;left:0;right:0;z-index:80;pointer-events:none;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:clamp(16px,2.4vw,26px) clamp(18px,4vw,44px);
+  mix-blend-mode:difference;color:#fff;
+}
+.op-topbar a,.op-topbar span{pointer-events:auto;}
+.op-topbar .op-name{font-family:var(--title);font-weight:400;text-transform:uppercase;letter-spacing:.16em;font-size:13px;}
+.op-topbar .op-weather{font-family:var(--mono);font-weight:500;text-transform:uppercase;letter-spacing:.14em;font-size:11px;}
+
+/* ---- HERO (ditta-style: solid pink, black type, weight morph on hover) ---- */
+#hero{
+  position:relative;min-height:100vh;display:flex;flex-direction:column;
+  justify-content:flex-end;align-items:center;text-align:center;overflow:hidden;
+  padding:100px 0 0;
+  background:var(--pink);color:#111;
+}
+#hero .hero-meta{
+  position:absolute;top:clamp(16px,2.6vw,30px);left:clamp(16px,4vw,44px);right:auto;
+  display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:2px;
+  font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:#111;
+}
+#hero .hero-name{
+  margin:0 0 -0.19em;font-family:var(--title);font-weight:600;text-transform:none;
+  color:#111;line-height:.68;letter-spacing:-.03em;white-space:nowrap;
+  font-size:clamp(54px,20.5vw,400px);cursor:default;
+}
+#hero .hero-name span{display:inline;}
+#hero .hero-name .l{display:inline-block;font-variation-settings:'wght' 600;font-weight:600;transition:font-variation-settings .18s var(--ease),font-weight .18s var(--ease);}
+
+/* ---- section shell (full width) ---- */
+.op-sec{padding:clamp(90px,14vh,190px) clamp(22px,6vw,90px);max-width:none;margin:0;}
+.op-eyebrow{font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 clamp(30px,5vh,60px);}
+
+/* ---- ABOUT (black bg, big "Hi", light text, scroll word reveal) ---- */
+#about{background:#0d0d0d;color:#fff;padding-top:clamp(140px,22vh,300px);padding-bottom:clamp(140px,22vh,300px);}
+#about .about-hi{
+  font-family:var(--title);font-weight:700;color:#fff;
+  font-size:clamp(64px,12vw,190px);line-height:.9;letter-spacing:-.03em;
+  margin:0 0 clamp(50px,9vh,120px);
+}
+#about .about-text{
+  font-family:var(--title);font-weight:300;
+  font-size:clamp(19px,2.5vw,34px);line-height:1.44;letter-spacing:0;
+  max-width:34em;margin:0;text-align:left;
+}
+#about .about-text + .about-text{margin-top:clamp(40px,7vh,80px);}
+#about .about-text .w{color:rgba(255,255,255,.22);transition:color .4s var(--ease);}
+#about .about-text .w.on{color:#fff;}
+#about .about-text .w.hl{font-weight:800;}
+
+/* ---- WORK gallery: full-bleed 1:1 grid, 2px black gaps, no radius ---- */
+#work{background:#000;padding:0;}
+#workGrid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+}
+.work-item{
+  position:relative;display:block;border:0;padding:0;margin:0;cursor:pointer;
+  background:#fff;overflow:hidden;border-radius:0;aspect-ratio:1/1;
+  font:inherit;color:inherit;text-align:left;
+}
+.work-media{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .9s var(--ease);}
+.work-item:hover .work-media{transform:scale(1.04);}
+.work-ov{
+  position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;
+  gap:8px;padding:clamp(16px,2vw,28px);
+  background:linear-gradient(to top,rgba(10,10,12,.82) 0%,rgba(10,10,12,.35) 45%,rgba(10,10,12,0) 78%);
+  opacity:0;transition:opacity .5s var(--ease);
+}
+.work-item:hover .work-ov{opacity:1;}
+.work-ov .work-t{font-family:var(--title);font-weight:300;text-transform:uppercase;font-size:clamp(18px,1.8vw,26px);letter-spacing:.06em;color:#fff;line-height:1.1;}
+.work-ov .work-t .tr{font-weight:300;opacity:.7;}
+.work-ov .work-m{display:none;}
+@media(max-width:1000px){#workGrid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:640px){#workGrid{grid-template-columns:repeat(2,1fr);}
+  .work-ov{opacity:1;background:linear-gradient(to top,rgba(10,10,12,.78),rgba(10,10,12,0) 62%);}}
+
+/* ---- SERVICES (grey bg, falling physics pills) ---- */
+#services{background:#d8d3ce;color:#111;position:relative;overflow:hidden;padding-bottom:0;}
+#services .svc-title{font-family:var(--title);font-weight:700;font-size:clamp(48px,9vw,150px);line-height:.9;letter-spacing:-.02em;margin:0 0 clamp(20px,3.5vh,40px);}
+#services .svc-intro{font-family:var(--title);font-weight:500;font-size:clamp(18px,2vw,26px);line-height:1.5;max-width:26em;margin:0;color:#111;}
+.svc-fall{position:relative;width:100%;height:min(58vh,500px);margin-top:clamp(20px,4vh,44px);}
+.svc-pill{
+  position:absolute;top:0;left:0;display:inline-flex;align-items:center;white-space:nowrap;
+  padding:12px 26px;border-radius:999px;background:#fff;color:#111;
+  font-family:var(--title);font-weight:600;font-size:clamp(15px,1.5vw,22px);letter-spacing:-.005em;
+  box-shadow:0 6px 18px rgba(0,0,0,.10);will-change:transform;user-select:none;pointer-events:none;
+}
+
+/* ---- EXPERIENCE (white bg, contained in a card, compact type) ---- */
+#experience{background:#fff;color:#111;}
+#experience .xp-title{font-family:var(--title);font-weight:700;font-size:clamp(30px,4.6vw,64px);line-height:.95;letter-spacing:-.02em;margin:0 0 clamp(22px,3.5vh,40px);}
+.xp-list{
+  padding:0;max-width:1100px;
+}
+.xp-row{
+  display:grid;grid-template-columns:clamp(96px,11vw,150px) minmax(0,1fr) minmax(0,1.15fr);
+  gap:clamp(12px,2vw,30px);align-items:baseline;
+  padding:clamp(11px,1.4vw,17px) 4px;border-bottom:1px solid var(--line2);
+  transition:padding-left .3s var(--ease);
+}
+.xp-row:last-child{border-bottom:0;}
+.xp-row:hover{padding-left:10px;}
+.xp-date{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
+.xp-co{font-family:var(--title);font-weight:700;font-size:clamp(15px,1.4vw,19px);letter-spacing:-.01em;}
+.xp-role{font-family:var(--title);font-weight:400;font-size:clamp(13px,1.2vw,16px);color:rgba(0,0,0,.6);}
+@media(max-width:680px){.xp-row{grid-template-columns:1fr;gap:2px;padding:14px 2px;}}
+
+/* ---- NEXT LEVEL (light grey bg so the pink reads, no title) ---- */
+#next{background:#ededed;color:#111;}
+#next .next-lead{font-family:var(--title);font-weight:700;font-size:clamp(30px,5.4vw,78px);line-height:1.02;letter-spacing:-.01em;margin:0 0 clamp(20px,3vh,34px);max-width:14em;}
+#next .next-sub{font-size:clamp(15px,1.4vw,18px);line-height:1.7;color:rgba(0,0,0,.6);max-width:44em;margin:0 0 clamp(56px,9vh,110px);}
+.next-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,56px);}
+.next-step{border-top:1px solid #111;padding-top:22px;}
+.next-step .ns-num{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--pink);margin:0 0 18px;}
+#next .pk{color:var(--pink);font-weight:800;}
+.next-step h3{font-family:var(--title);font-weight:700;font-size:clamp(20px,2vw,28px);letter-spacing:-.01em;margin:0 0 8px;}
+.next-step h4{font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(0,0,0,.5);margin:0 0 16px;}
+.next-step p{font-size:14.5px;line-height:1.65;color:rgba(0,0,0,.7);margin:0;}
+@media(max-width:820px){.next-steps{grid-template-columns:1fr;gap:34px;}}
+
+/* ---- FOOTER (contact, email letters) ---- */
+#foot{background:#0d0d0d;color:#f4f0ea;padding:clamp(80px,13vh,170px) clamp(22px,6vw,90px) clamp(40px,7vh,70px);}
+#foot .foot-in{max-width:1400px;margin:0 auto;}
+#foot .foot-lead{font-family:var(--title);font-weight:300;font-size:clamp(30px,5vw,68px);line-height:1.08;letter-spacing:-.005em;margin:0 0 clamp(26px,4vh,40px);max-width:16em;}
+#foot .foot-sub{font-size:clamp(15px,1.4vw,18px);line-height:1.7;color:rgba(255,255,255,.62);max-width:40em;margin:0 0 clamp(46px,7vh,80px);}
+#foot .foot-sub a{color:var(--pink);}
+.email-letters{display:flex;flex-wrap:wrap;gap:2px;margin:0 0 clamp(60px,10vh,120px);}
+.email-letters a{
+  font-family:var(--title);font-weight:700;text-transform:lowercase;
+  font-size:clamp(34px,8.5vw,120px);line-height:1;letter-spacing:-.02em;
+  color:var(--pink);
+  transition:transform .35s var(--ease),opacity .35s var(--ease);
+}
+.email-letters a:hover{transform:translateY(-10px);opacity:.72;}
+#foot .foot-bottom{display:flex;flex-wrap:wrap;gap:18px 30px;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.14);padding-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);}
+#foot .foot-bottom a:hover{color:var(--pink);}
+.foot-social{display:flex;gap:22px;}
+
+/* section fade-up reveal */
+.sfade{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.sfade.vis{opacity:1;transform:none;}
+
+@media (prefers-reduced-motion:reduce){#hero{animation:none;} #hero .hero-scroll::after{animation:none;} .sfade{opacity:1 !important;transform:none !important;}}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-meta">
+    <span id="heroDate">—</span>
+    <span>Madrid</span>
+    <span id="heroTemp">—°</span>
+  </div>
+  <h1 class="hero-name"><span>Rocío</span> <span>Abad</span></h1>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="op-sec">
+  <h2 class="about-hi">Hi,</h2>
+  <p class="about-text" data-words>Madrid-based graphic designer, specialised in branding, typography and web design, with 20 years of professional experience. Inspired by strong but simply executed concepts, my expertise covers diverse work both in print and digital media for a wide-range of clients.</p>
+  <p class="about-text" data-words>Passionate about photography, architecture, urban culture, forthcoming trends and multidisciplinary creativity.</p>
+</section>
+
+<!-- WORK -->
+<section id="work" class="op-sec">
+  <div id="workGrid"></div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="op-sec">
+  <h2 class="svc-title">Services</h2>
+  <p class="svc-intro">I specialise in building brands and digital products — supporting you at every stage, from early concept and identity through to full delivery, in print and on screen.</p>
+  <div class="svc-fall" id="svcFall" aria-label="Services list"></div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="op-sec">
+  <h2 class="xp-title">Experience</h2>
+  <div class="xp-list">
+    <div class="xp-row"><span class="xp-date">2024 — Present</span><span class="xp-co">Globant</span><span class="xp-role">Senior UX/UI Designer</span></div>
+    <div class="xp-row"><span class="xp-date">2020 — 2024</span><span class="xp-co">HT-Shirts</span><span class="xp-role">Etsy / Shopify</span></div>
+    <div class="xp-row"><span class="xp-date">2020 — 2022</span><span class="xp-co">Nulinga</span><span class="xp-role">Head of Design</span></div>
+    <div class="xp-row"><span class="xp-date">2018</span><span class="xp-co">National Geographic</span><span class="xp-role">Project Manager &amp; Visual Lead Designer</span></div>
+    <div class="xp-row"><span class="xp-date">2010 — 2018</span><span class="xp-co">The Walt Disney Company</span><span class="xp-role">Lead Visual Designer</span></div>
+    <div class="xp-row"><span class="xp-date">2009 — 2010</span><span class="xp-co">Una Buena</span><span class="xp-role">Head of Design</span></div>
+    <div class="xp-row"><span class="xp-date">2007 — 2009</span><span class="xp-co">Warner Music</span><span class="xp-role">Graphic Designer</span></div>
+  </div>
+</section>
+
+<!-- PUSH TO THE NEXT LEVEL -->
+<section id="next" class="op-sec">
+  <h2 class="next-lead">Go beyond generic templates and build something <span class="pk">people remember.</span></h2>
+  <p class="next-sub">Strong concepts, simply executed. I partner closely with you to turn a rough brief into work that looks considered, feels effortless and stands apart from the crowd.</p>
+  <div class="next-steps">
+    <div class="next-step">
+      <p class="ns-num">01</p>
+      <h3>Getting started</h3>
+      <h4>Conversations, scoping &amp; planning</h4>
+      <p>Every project starts with <span class="pk">your brief</span>. Tell me your goals and budget, and together we'll refine the scope and explore the right solutions to your problems.</p>
+    </div>
+    <div class="next-step">
+      <p class="ns-num">02</p>
+      <h3>Design &amp; build</h3>
+      <h4>Feedback, iteration &amp; craft</h4>
+      <p>You work <span class="pk">directly with me</span> — no middlemen, no red tape. Frictionless collaboration, thoughtful iteration and careful craft on every detail.</p>
+    </div>
+    <div class="next-step">
+      <p class="ns-num">03</p>
+      <h3>Ship &amp; support</h3>
+      <h4>It's all yours, no lock-in</h4>
+      <p>I hand over polished, <span class="pk">production-ready</span> design with guidance along the way, so you launch feeling confident and fully in control.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER / CONTACT -->
+<footer id="foot">
+  <div class="foot-in">
+    <h2 class="foot-lead">I create digital experiences that turn your visitors into customers.</h2>
+    <p class="foot-sub">If you have a new project in mind and would like to collaborate, get in touch with my Madrid studio via the email below.</p>
+    <div class="email-letters" id="emailLetters"></div>
+    <div class="foot-bottom">
+      <span>© <span id="footYear"></span> Rocío Abad — Madrid</span>
+      <span class="foot-social">
+        <a href="https://www.linkedin.com/in/rocioabad/" target="_blank" rel="noopener">LinkedIn</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- PROJECT DETAIL -->
+<section class="panel" id="panel-project">
+  <div class="back-wrap"><a class="back" id="backLink" aria-label="Back to home">Rocío Abad</a></div>
+  <div id="projectContent"></div>
+  <div class="proj-nav" id="projNav">
+    <a class="pn" id="pnPrev" aria-label="Previous project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <a class="pn" id="pnNext" aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<!-- external project content (editable from the editor via "Guardar para el sitio") -->
+<script src="images/aquarabia/aquarabia-content.js"></script>
+<script src="images/sixflags/sixflags-content.js"></script>
+<script src="images/colablearn/colablearn-content.js"></script>
+<script src="images/mercadolibre/mercadolibre-content.js"></script>
+<script src="images/smarthome/smarthome-content.js"></script>
+<script src="images/nulinga/nulinga-content.js"></script>
+<script src="images/lia-aerospace/lia-aerospace-content.js"></script>
+<script src="images/afc/afc-content.js"></script>
+<script src="images/google-growth-summit/google-growth-summit-content.js"></script>
+<script src="images/lemon/lemon-content.js"></script>
+<script src="images/bahamas/bahamas-content.js"></script>
+<script src="images/disney-junior/disney-junior-content.js"></script>
+<script src="images/natgeo-kids-xmas/natgeo-kids-xmas-content.js"></script>
+<script src="images/kikely/kikely-content.js"></script>
+<script src="images/nike-by-you/nike-by-you-content.js"></script>
+<script src="images/nike-sb-green-power/nike-sb-green-power-content.js"></script>
+<script src="images/gsw-champions-22/gsw-champions-22-content.js"></script>
+<script src="images/mareth/mareth-content.js"></script>
+<script src="images/disney-channel/disney-channel-content.js"></script>
+<script src="images/kayanee/kayanee-content.js"></script>
+<script src="images/SimpleCamera/simplecamera-content.js"></script>
+
+<script>
+/* ================= data ================= */
+const SQ = 'https://images.squarespace-cdn.com/content/v1/64da91dc95d975023fb563f2/';
+const R = pth => 'https://www.rocioabad.com/_next/image?url=' + encodeURIComponent('/images/' + pth) + '&w=1920&q=75';
+
+const AQUARABIA = {
+  title:'Aquarabia', slug:'aquarabia', year:'2025',
+  roles:['ux / ui design','design system','web & app','rtl design'],
+  ratio:'4/3', tone:2, thumb:'images/Avatar/Aquarabia Avatar 2.jpeg'
+};
+
+const SIXFLAGS = {
+  title:'Six Flags Qiddiya', slug:'sixflags', year:'2025',
+  roles:['ux / ui design','design system','web & app','rtl design'],
+  ratio:'4/3', tone:3, thumb:'images/Avatar/SixFlags Avatar Large3.jpg'
+};
+
+const PROJECTS = {
+  ux: [
+    AQUARABIA,
+    SIXFLAGS,
+    {title:'Colablearn | UX/UI', year:'2022', roles:['UX/UI Design'], ratio:'4/3', tone:1,
+     hero:R('Colablearn/Colablearn-01.png'), thumb:'images/Avatar/Colablearn Avatar Large.jpeg',
+     desc:'ColaLearn is a cutting-edge educational app designed to transform the way people learn by offering a personalized and immersive virtual classroom experience.',
+     sections:[
+       {imgs:['Colablearn/open.png'],cols:1},
+       {label:'User Flow',imgs:['Colablearn/Colablearn-03.png'],cols:1},
+       {label:'UI Kit',imgs:['Colablearn/Colablearn-04.png'],cols:1}
+     ]},
+    {title:'MercadoLibre | UX/UI', year:'2021', roles:['UX/UI Design'], ratio:'3/4', tone:2,
+     hero:R('Mercadolibre/Behance_responsive-02.png'), thumb:'images/Avatar/Mercadolibre Avatar Large.jpeg',
+     desc:'New simpler, more agile and modern user interface — adding features such as purchase tracking from home, simplified user profile, and lists to share.',
+     sections:[
+       {imgs:['Mercadolibre/Behance_responsive-03.png'],cols:1},
+       {imgs:['Mercadolibre/Behance_responsive-04.png','Mercadolibre/Behance_responsive-05.png'],cols:2},
+       {imgs:['Mercadolibre/Behance_responsive-10.png'],cols:1}
+     ]},
+    {title:'SmartHome UX/UI', year:'2021', roles:['UX/UI Design'], ratio:'1/1', tone:3,
+     hero:R('SmartHome/SmartHome_Avatar-01.png'), thumb:'images/Avatar/SmartHome Avatar Large.jpeg',
+     desc:'SmartLife unifies the control of diverse smart home devices into one intuitive interface, eliminating the need to switch between multiple apps.',
+     sections:[
+       {imgs:['SmartHome/SmartHome-13.png','SmartHome/SmartHome-14.png'],cols:2},
+       {label:'UI Kit',imgs:['SmartHome/SmartHome-06.png'],cols:1},
+       {label:'Wireframe',imgs:['SmartHome/SmartHome-10.png','SmartHome/SmartHome-11.png'],cols:2}
+     ]},
+    {title:'Kayanee | Brand & Digital', year:'2023', roles:['Art Direction','UX/UI'], ratio:'4/3', tone:4, thumb:'images/Avatar/Kayanee Avatar.jpeg'},
+    {title:'Nulinga | Design System', year:'2021', roles:['Head of Design'], ratio:'3/4', tone:5,
+     hero:R('Nulinga/NulingaCOM-04.png'), thumb:'images/Avatar/Nulinga Avatar.jpg',
+     desc:'Complete brand identity and design system for Nulinga. A comprehensive styleguide covering logo, typography, color system, and digital applications.',
+     sections:[
+       {imgs:['Nulinga/nulinga-02.png','Nulinga/nulinga-03.png'],cols:2},
+       {imgs:['Nulinga/nulinga-06.png','Nulinga/nulinga-07.png'],cols:2},
+       {label:'COM',imgs:['Nulinga/NulingaCOM-01.png','Nulinga/NulingaCOM-02.png','Nulinga/NulingaCOM-05.png','Nulinga/NulingaCOM-06.png'],cols:2},
+       {label:'Web',imgs:['Nulinga/web_empresa_Onboarding-01.png','Nulinga/web_empresa_Onboarding-02.png','Nulinga/web_empresa_Onboarding-03.png','Nulinga/web_empresa_Onboarding-04.png'],cols:2}
+     ]},
+    {title:'LIA Aerospace | Styleguide', year:'2022', roles:['Art Direction','Branding'], ratio:'4/3', tone:6,
+     hero:R('Lia/LIA AVATAR.png'), thumb:'images/Avatar/Lia Avatar.png',
+     desc:'Brand encapsulating the spirit of innovation and forward-thinking of this Argentine aerospace startup.',
+     sections:[
+       {imgs:['Lia/LiaAerospace-02.png'],cols:1},
+       {imgs:['Lia/LiaAerospace-04.png','Lia/LiaAerospace-05.png'],cols:2},
+       {imgs:['Lia/LiaAerospace-06.png','Lia/LiaAerospace-07.png'],cols:2}
+     ]}
+  ],
+  design: [
+    {title:'AFC | Asian Football Cup', year:'2023', roles:['Art Direction','Design'], ratio:'3/2', tone:2,
+     hero:'images/afc/01.jpg', thumb:'images/Avatar/Asian Cup Avatar.jpeg',
+     desc:'Graphic system and visual identity for the AFC Asian Cup, one of the continent\'s biggest football tournaments. A bold, energetic language designed to travel across broadcast, stadium and digital applications.',
+     sections:[
+       {imgs:['images/afc/02.jpg'],cols:1}
+     ]},
+    {title:'Google | Growth Summit', year:'2022', roles:['Art Direction','Design'], ratio:'3/4', tone:1,
+     hero:SQ+'d6bf7b98-65f4-4e8a-86ef-daa21369e2db/Google-02.png', thumb:'images/Avatar/Google Avatar.png',
+     desc:'We had the pleasure of participating in the Google Partners Growth Summit event, designing the graphic system. This event connects organizations with Google senior leaders to explore how to enhance and diversify digital advertising.',
+     sections:[
+       {imgs:[SQ+'4bcacbfb-f1c2-486a-ad95-3bafa9e70dad/Google-03.png',SQ+'1c8d819d-2dd4-4be2-a9a9-c9a84d509b4b/Google-04.png',SQ+'adf8f4bb-67e3-49f9-acb8-cce6bcdf3365/Google-05.png'],cols:1},
+       {label:'Typography',imgs:[SQ+'830f54ba-cdd1-4ecd-a92b-40ce40a7aeda/Google-06.png',SQ+'305ae856-9ee7-43ab-8a8a-bd19da29196c/Google-07.png',SQ+'d67a0eb4-dbb6-4179-8c62-d9d328dd58d4/Google-08.png',SQ+'45b7f666-ef52-4064-9ec4-c01e66ef70f4/Google-09.png'],cols:1},
+       {imgs:[SQ+'1da5b406-a01c-497a-9d06-d51140377ca4/Google-19.png',SQ+'728274de-edbd-463e-9a94-97d960d5dc5e/Google-20.png',SQ+'dbbf981c-bbf1-48f9-bfc8-5087b7b528b4/Google-21.png',SQ+'83571e8d-1900-45fe-ac7a-bc508858907c/Google-22.png'],cols:1},
+       {label:'Applications',imgs:[SQ+'9b7fb806-61aa-49fd-85bc-0955cd480419/Google-10.png'],cols:1},
+       {imgs:[SQ+'f0f581ae-ee97-4435-83b7-d111cf3b611f/Google-15.png',SQ+'1f3bb28c-0eb5-4972-b7e3-6fea98ef514d/Google-18.png',SQ+'52acf43a-dbd3-4e23-aa35-444ae64a2eb7/Google-16.png',SQ+'4341ddca-b31c-4b6b-8811-c007399b4af8/Google-17.png'],cols:1},
+       {label:'Huge Screens',imgs:[SQ+'d65de5df-5329-4429-864f-dead63d1ea6a/Google-11.png',SQ+'85dd9e92-df10-4002-a258-682d7d24244b/Google-12.png'],cols:1},
+       {imgs:[SQ+'4dace50f-a8a2-4262-9a69-4aaf7f02635d/Google-13.png',SQ+'e5669ba0-0bda-4bae-9874-938a972678a6/Google-14.png'],cols:1}
+     ]},
+    {title:'Lemon | Brand Identity', year:'2022', roles:['Art Direction','Branding'], ratio:'4/3', tone:2,
+     hero:R('Lemon/Lemon_transparent-09.png'), thumb:'images/Avatar/Lemon Avatar Large.jpeg',
+     desc:'Lemon, a pioneering fintech company at the forefront of the cryptocurrency revolution in Latin America.',
+     sections:[
+       {imgs:['Lemon/Lemon-05.png','Lemon/Lemon-06.png'],cols:2},
+       {imgs:['Lemon/Lemon_transparent-13.png','Lemon/Lemon_transparent-14.png'],cols:2},
+       {imgs:['Lemon/Lemon_transparent-15.png','Lemon/Lemon_transparent-16.png'],cols:2}
+     ]},
+    {title:'Bahamas | Identity', year:'2019', roles:['Art Direction','Branding'], ratio:'1/1', tone:3,
+     hero:R('Bahamas/Bahamas-02.png'), thumb:'images/Avatar/Bahamas Avatar.jpeg',
+     desc:'New visual identity development for the island of Bahamas. Something colorful, fresh, inspired by nature, full of life. A captivating blend of modern luxury and authentic island charm.',
+     sections:[
+       {imgs:['Bahamas/Bahamas-08.png'],cols:1},
+       {imgs:['Bahamas/Bahamas-30.png'],cols:1},
+       {label:'Typography & Colors',imgs:['Bahamas/Bahamas-19.png','Bahamas/Bahamas-20.png','Bahamas/Bahamas-21.png','Bahamas/Bahamas-22.png'],cols:1},
+       {label:'Photography',imgs:['Bahamas/Bahamas-13.png','Bahamas/Bahamas-14.png','Bahamas/Bahamas-15.png','Bahamas/Bahamas-16.png'],cols:2},
+       {label:'Mockups',imgs:['Bahamas/Bahamas-29.png','Bahamas/Bahamas-27.png','Bahamas/Bahamas-11.png','Bahamas/Bahamas-09.png'],cols:1}
+     ]},
+    {title:'Disney Junior | Logo', year:'2021', roles:['Lead Visual Designer'], ratio:'4/3', tone:4,
+     hero:R('DisneyJunior Logos/DisneyJunior_AVATAR_Mesa de trabajo 1.png'), thumb:'images/Avatar/DisneyJunior Avatar.png',
+     desc:'Fresh and modern Disney Junior logo in vibrant pastels with a subtle Mickey Mouse ears silhouette.',
+     sections:[
+       {imgs:['DisneyJunior Logos/DisneyJunior_Logos-02.png'],cols:1},
+       {imgs:['DisneyJunior Logos/DisneyJunior_Logos-05.png','DisneyJunior Logos/DisneyJunior_Logos-06.png'],cols:2},
+       {imgs:['DisneyJunior Logos/DisneyJunior_Logos-07.png','DisneyJunior Logos/DisneyJunior_Logos-08.png'],cols:2}
+     ]},
+    {title:'NatGeo Kids | Xmas', year:'2020', roles:['Lead Visual Designer'], ratio:'3/4', tone:5,
+     hero:'images/natgeo-kids-xmas/NatGeo+Kids+Navidad-04.jpeg', thumb:'images/Avatar/Natgeo kids Avatar Large.jpg',
+     desc:'Special ID to promote the Christmas season on NatGeo Kids — a Christmas dream machine, full of candy and toys used across a 360 campaign.',
+     sections:[
+       {imgs:['images/natgeo-kids-xmas/NatGeo+Kids+Navidad-03.jpeg'],cols:1},
+       {imgs:['images/natgeo-kids-xmas/NatGeo+Kids+Navidad-05.jpg','images/natgeo-kids-xmas/ESC_A_0442.jpeg'],cols:2},
+       {label:'Tipography',imgs:['images/natgeo-kids-xmas/tipography/NatGeo+Kids+Navidad-06.png','images/natgeo-kids-xmas/tipography/NatGeo+Kids+Navidad-07.jpg'],cols:1},
+       {label:'Colors',imgs:['images/natgeo-kids-xmas/colors/NatGeo+Kids+Navidad-12.png','images/natgeo-kids-xmas/colors/NatGeo+Kids+Navidad-14.png'],cols:2},
+       {imgs:['images/natgeo-kids-xmas/colors/NatGeo+Kids+Navidad-09.png','images/natgeo-kids-xmas/colors/NatGeo+Kids+Navidad-11.png','images/natgeo-kids-xmas/colors/NatGeo+Kids+Navidad-13.png'],cols:3},
+       {label:'Patterns',imgs:['images/natgeo-kids-xmas/patterns/NatGeo+Kids+Navidad-08.png','images/natgeo-kids-xmas/patterns/NatGeo+Kids+Navidad-15.png','images/natgeo-kids-xmas/patterns/NatGeo+Kids+Navidad-16.png'],cols:3},
+       {label:'ID Frames',imgs:['images/natgeo-kids-xmas/Id_Especial+Navidad_ID_Especial_Fiestas_15+sec_ProRess+Alpha_1_H.264+(0-00-09-13).jpg','images/natgeo-kids-xmas/Id_Especial+Navidad_ID_Especial_Fiestas_15+sec_ProRess+Alpha_1_H.264+(0-00-09-26).jpg','images/natgeo-kids-xmas/Id_Especial+Navidad_ID_Especial_Fiestas_15+sec_ProRess+Alpha_1_H.264+(0-00-11-23).jpg','images/natgeo-kids-xmas/Id_Especial+Navidad_ID_Especial_Fiestas_15+sec_ProRess+Alpha_1_H.264+(0-00-13-12).jpg'],cols:2},
+       {label:'Renders',imgs:['images/natgeo-kids-xmas/renders/0.png'],cols:1},
+       {imgs:['images/natgeo-kids-xmas/renders/1.png','images/natgeo-kids-xmas/renders/3.png','images/natgeo-kids-xmas/renders/4.jpg'],cols:3}
+     ]},
+    {title:'Kikely Brand | Styleguide', year:'2021', roles:['Art Direction','Branding'], ratio:'4/3', tone:6,
+     hero:R('Kikely/Sistema Grafico_4_TAPA.png'), thumb:'images/Avatar/Kikely Avatar.png',
+     desc:'Nordik Living furniture brand by Kikely, blending modern design with Nordic influences.',
+     sections:[
+       {imgs:['Kikely/Sistema Grafico_4_LOGO PPAL.png'],cols:1},
+       {label:'Applications',imgs:['Kikely/Kikely-09.png','Kikely/Kikely-10.png','Kikely/Kikely-07.png','Kikely/Kikely-08.png'],cols:2}
+     ]},
+    {title:'Nike | by You', year:'2021', roles:['Art Direction','Design'], ratio:'1/1', tone:1,
+     hero:R('Nike SB Levitate/Nike_livitate_avatar.png'), thumb:'images/Avatar/Nike SB Avatar Large.jpeg',
+     desc:'Custom-designed Nike SB shoe created through the "Nike By You" customization platform, featuring wings symbolizing style and freedom.',
+     sections:[
+       {imgs:['Nike SB Levitate/Nike_SB_Behance-01.png'],cols:1},
+       {imgs:['Nike SB Levitate/Nike_SB_Behance-05.png','Nike SB Levitate/Nike_SB_Behance-06.png'],cols:2}
+     ]},
+    {title:'Nike SB | Green Power', year:'2020', roles:['Art Direction','Design'], ratio:'3/4', tone:2,
+     hero:R('Nike SB GreenPower/Nike_Greenpower_behance-05.png'), thumb:'images/Avatar/Nike Greenpower Avatar Large.jpeg',
+     desc:"The poster \"Green Power\" embodies the essence of Nike SB's shoes. A massive, ethereal hand cradles a Nike SB shoe, showcasing eco-conscious design in shades of green.",
+     sections:[
+       {imgs:['Nike SB GreenPower/Nike_Greenpower_behance-05.png','Nike SB GreenPower/Nike_Greenpower_behance-06.png'],cols:2},
+       {imgs:['Nike SB GreenPower/Nike_Greenpower_behance-07.png','Nike SB GreenPower/Nike_Greenpower_behance-08.png'],cols:2}
+     ]},
+    {title:'GSW | Champions 22', year:'2022', roles:['Art Direction','Motion Design'], ratio:'4/3', tone:3,
+     hero:R('GSW Champions 22/Curry-04.png'), thumb:'images/Avatar/GSW Avatar Large.jpeg',
+     desc:"Graphic proposal celebrating the Golden State Warriors' victory as the 2022 champions. Featuring the iconic GSW logo surrounded by celebratory confetti and action shots of key championship moments.",
+     sections:[
+       {imgs:['GSW Champions 22/Curry-02.png','GSW Champions 22/Curry-03.png'],cols:2},
+       {imgs:['GSW Champions 22/Curry-05.png'],cols:1},
+       {imgs:['GSW Champions 22/Curry-10.png','GSW Champions 22/Curry-11.png'],cols:2}
+     ]},
+    {title:'Mareth | Restaurant', year:'2022', roles:['Art Direction','Branding'], ratio:'4/3', tone:4,
+     hero:R('Mareth/Mareth-0.png'), thumb:'images/Avatar/Mareth Avatar Large.jpeg',
+     desc:'The new brand identity for Mareth Fish Boutique encapsulates the essence of Greek coastal cuisine and the mesmerizing allure of Mykonos. This boutique restaurant, specializing in fish delicacies, creates an immersive dining experience that celebrates the bounties of the sea and the vibrant spirit of the Mediterranean.',
+     sections:[
+       {imgs:[SQ+'c9c5d7b5-99f4-40b0-a0e7-b3b62355a311/Mareth-02.png',SQ+'1c33ed6c-a5f2-4f3c-a9ee-cbc2b0e5dbbe/Mareth_0.png'],cols:1},
+       {label:'Typography',text:"The typography is a harmonious blend of classic and modern elements. A sophisticated serif font represents the elegance of the restaurant, while a contemporary sans-serif font adds a touch of freshness.",imgs:[SQ+'7f8d52d6-d874-4de8-a82a-ee6ffc40b99a/Mareth-03.png'],cols:1},
+       {label:'Colors',text:'The color palette draws inspiration from the vivid colors of the Mykonos landscape. Crisp whites, shades of blue reminiscent of the sea and sky, and soft sandy tones reflect the natural beauty of the island.',imgs:[SQ+'b11a43a5-0c2a-4776-b0d7-ac1a46dcb374/Mareth-04.png',SQ+'4b5b804e-d2f5-40cf-9ec1-9eec7235aa42/Mareth-06.png'],cols:2},
+       {label:'Imagery',text:'The brand imagery showcases breathtaking seascapes, tantalizing seafood platters, and moments of conviviality among diners — from the sun-drenched terraces to the intimate interiors.',imgs:[SQ+'f5d113f5-a029-4684-a5df-78d3024ae612/Mareth-08.png',SQ+'8a25a492-1efd-4ed5-8096-e6f5fd629330/Mareth-07.png',SQ+'7a3922d8-0fee-4e12-bd75-a6c185446838/Mareth-10.png',SQ+'eec928c4-ec3d-4102-8686-21e100ca810d/Mareth-09.png'],cols:2},
+       {label:'Menu Design',text:'Menus are designed with a blend of artistic creativity and practicality. Inspired by nautical charts, the layout features subtle seafaring motifs and elegant typography.',imgs:[SQ+'a6aed5f5-be27-4525-887a-517b58632027/Mareth-11.png',SQ+'af53062a-1dcb-444f-9d88-4f7a4abfee60/Mareth-12.png',SQ+'a725ff10-50d7-488f-9ee9-8ef05fa99e72/Mareth-13.png',SQ+'169d9303-f9f5-40db-a8d4-1ad7532e0e4c/Mareth-19.png',SQ+'c65b81ea-2eb4-4e2a-b916-a54842b05ded/Mareth-14.png',SQ+'9e39378a-471e-44b1-97ce-9c5284b6e750/Mareth-21.png',SQ+'2b05b0b1-8eea-4502-972e-bc11b3fe81f8/Mareth-15.png',SQ+'06194cf6-4b53-48d2-a1ca-a2cb547ca398/Mareth-17.png',SQ+'1f918d3f-7b35-4401-9698-b40595078d7f/Mareth-22.png',SQ+'07f11a0d-8fde-4596-8b2f-a8177e855a3a/Mareth-18.png',SQ+'753376c5-9cb3-4223-b8b1-ce36a6f3d4f2/Mareth-20.png'],cols:2}
+     ]},
+    {title:'Disney Channel | Logo', year:'2021', roles:['Lead Visual Designer'], ratio:'3/4', tone:5,
+     hero:R('Disney Channel Logos/DisneyChannel_Logos-02.png'), thumb:'images/Avatar/Disney channel Avatar.png',
+     desc:'The proposed redesign of the Disney Channel logo takes a bold and dynamic approach, infusing the brand with a burst of modernity and energy.',
+     sections:[
+       {imgs:['Disney Channel Logos/DisneyChannel_Logos_1-02.png'],cols:1},
+       {label:'Logos',imgs:['Disney Channel Logos/DisneyChannel_Logos-05.png','Disney Channel Logos/DisneyChannel_Logos-06.png','Disney Channel Logos/DisneyChannel_Logos-07.png','Disney Channel Logos/DisneyChannel_Logos-08.png'],cols:2},
+       {imgs:['Disney Channel Logos/DisneyChannel_Logos-09.png'],cols:1}
+     ]}
+  ]
+};
+
+/* uniform 3-col grid: same-size cards, aligned, with subtle alternating parallax speeds */
+const ROWS = [
+  {n:3, flex:[1,1,1], off:[0,0,0], sp:[.05,-.04,.06]},
+  {n:3, flex:[1,1,1], off:[0,0,0], sp:[-.05,.05,-.04]},
+  {n:3, flex:[1,1,1], off:[0,0,0], sp:[.04,-.05,.05]}
+];
+
+/* real image helper: tries .png then .jpg, gray tone shows if neither exists */
+const bg = p => (p.startsWith('http') || /\.\w+$/.test(p)) ? `background-image:url(${JSON.stringify(p).replace(/"/g,'&quot;')});` : `background-image:url('${p}.png'),url('${p}.jpg');`;
+
+/* ================= build grids ================= */
+const fmtTitle = t => {
+  const i = t.indexOf('|');
+  if(i < 0) return t;
+  return t.slice(0,i).trim() + ' | <span class="tr">' + t.slice(i+1).trim() + '</span>';
+};
+
+function buildGrid(key){
+  const grid = document.getElementById('grid-'+key);
+  const items = PROJECTS[key];
+  let i = 0, r = 0, html = '';
+  while(i < items.length){
+    const row = ROWS[r % ROWS.length];
+    html += '<div class="grid-row">';
+    for(let c = 0; c < row.n && i < items.length; c++, i++){
+      const p = items[i];
+      const hasImg = p.thumb && (p.thumb.startsWith('http') || /\.\w+$/.test(p.thumb));
+      const media = hasImg
+        ? `<div class="ph"><img class="ph-inner" data-speed="${row.sp[c]}" src="${p.thumb.replace(/"/g,'&quot;')}" alt="${p.title}" loading="lazy"></div>`
+        : `<div class="ph" style="aspect-ratio:${p.ratio}"><div class="ph-inner tone-${p.tone}${p.thumb ? ' img' : ''}" data-speed="${row.sp[c]}"${p.thumb ? ` style="${bg(p.thumb)}"` : ''}></div></div>`;
+      html += `
+      <div class="cell" style="flex:${row.flex[c]};margin-top:${row.off[c]}px;--d:${(c*0.09).toFixed(2)}s">
+        <figure class="thumb" data-key="${key}" data-idx="${i}">
+          ${media}
+          <figcaption><span class="t">${fmtTitle(p.title)}</span></figcaption>
+        </figure>
+      </div>`;
+    }
+    html += '</div>';
+    r++;
+  }
+  grid.innerHTML = html;
+}
+/* ================= WORK gallery (all projects, hover overlay, click = detail) ================= */
+function buildWork(){
+  const grid = document.getElementById('workGrid');
+  if(!grid) return;
+  let html = '';
+  ['ux','design'].forEach(key => {
+    (PROJECTS[key] || []).forEach((p, idx) => {
+      const t = fmtTitle(p.title);
+      const meta = [p.year, ...(p.roles || [])].filter(Boolean).slice(0,2).join(' · ');
+      html += `<button class="work-item" type="button" data-key="${key}" data-idx="${idx}" aria-label="${(p.title||'').replace(/"/g,'&quot;')}">
+        <div class="work-media" style="${bg(p.thumb || '')}"></div>
+        <div class="work-ov"><span class="work-t">${t}</span><span class="work-m">${meta}</span></div>
+      </button>`;
+    });
+  });
+  grid.innerHTML = html;
+  grid.querySelectorAll('.work-item').forEach(el =>
+    el.addEventListener('click', () => openProject(el.dataset.key, +el.dataset.idx)));
+}
+buildWork();
+
+/* ================= navigation (single page + project-detail overlay) ================= */
+const body = document.body;
+let current = 'home', lastGrid = 'home';
+
+/* classify each project section using the editor's full-width flag:
+   a section is full width if it has the .mfw class OR contains an .m1 grid; everything else keeps the page margin */
+function markWidths(root){
+  if(!root) return;
+  root.querySelectorAll('.proj-section').forEach(sec => {
+    sec.classList.remove('op-fw','op-fill');
+    if(sec.classList.contains('scale-fit')) return;
+    const fw = sec.classList.contains('mfw') || sec.querySelector('.img-grid.m1, .content-grid.m1');
+    if(fw){
+      sec.classList.add('op-fw');
+      const imgCount = sec.querySelectorAll('.img-grid > img, .content-grid .gcard.has-img').length;
+      if(imgCount === 1) sec.classList.add('op-fill');   // single full image -> show it whole (no crop)
+    }
+  });
+}
+function show(name){
+  const proj = document.getElementById('panel-project');
+  if(name === 'project'){
+    proj.scrollTop = 0;
+    proj.style.transition = 'none';
+    proj.classList.remove('active');
+    void proj.offsetHeight;
+    proj.style.transition = '';
+    requestAnimationFrame(() => proj.classList.add('active'));
+    body.classList.add('detail-open');
+    current = 'project';
+    markWidths(document.getElementById('projectContent'));
+    requestAnimationFrame(() => armReveal(proj));
+    return;
+  }
+  proj.classList.remove('active');
+  body.classList.remove('detail-open');
+  current = 'home';
+}
+function armReveal(panel){
+  if(!panel || !('IntersectionObserver' in window)) return;
+  const targets = panel.querySelectorAll('.proj-section, .grid .cell, .hero, .hero-img, .prose, .exp, .contact-mid');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { root: panel, threshold: 0.06, rootMargin: '0px 0px -6% 0px' });
+  targets.forEach(t => { if(!t.classList.contains('reveal')){ t.classList.add('reveal'); io.observe(t); } });
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') show('home'); });
+
+/* ================= semantic colors (Aquarabia design system) ================= */
+const SEMANTIC = [
+  {name:'Error', desc:'Error colors are used across error states and in "destructive" actions. They communicate a destructive/negative action, such as removing a user from your team.',
+   swatches:[
+     {aa:'AA 5.52',  hex:'#FCEEED', hsla:'hsla(4, 71, 96, 1)', tag:'5',      token:'--aq-color-semantic-error-5'},
+     {aa:'AAA 10.88',hex:'#F8D4D2', hsla:'hsla(4, 70, 92, 1)', tag:'15',     token:'--aq-color-semantic-error-15'},
+     {aa:'AAA 10.88',hex:'#ED948D', hsla:'hsla(4, 73, 79, 1)', tag:'50',     token:'--aq-color-semantic-error-50'},
+     {aa:'AA 4.87',  hex:'#DA291C', hsla:'hsla(4, 77, 48, 1)', tag:'BRIGHT', token:'--aq-color-semantic-error-bright'},
+     {aa:'AA 5.52',  hex:'#BA251C', hsla:'hsla(3, 74, 42, 1)', tag:'ERROR',  token:'--aq-color-semantic-error-base'}
+   ]},
+  {name:'Warning', desc:'Warning colors can communicate that an action is potentially destructive or "on-hold". These colors are commonly used in confirmations to grab the users\' attention.',
+   swatches:[
+     {aa:'AA 6.21',  hex:'#FDF4ED', hsla:'hsla(26, 80, 96, 1)', tag:'5',       token:'--aq-color-semantic-warning-5'},
+     {aa:'AAA 14.25',hex:'#FDE5D1', hsla:'hsla(27, 94, 93, 1)', tag:'15',      token:'--aq-color-semantic-warning-15'},
+     {aa:'AAA 14.25',hex:'#FBBE8C', hsla:'hsla(27, 93, 77, 1)', tag:'50',      token:'--aq-color-semantic-warning-50'},
+     {aa:'AAA 7.9',  hex:'#F77D19', hsla:'hsla(27, 93, 53, 1)', tag:'BRIGHT',  token:'--aq-color-semantic-warning-bright'},
+     {aa:'AA 4.91',  hex:'#944505', hsla:'hsla(27, 93, 30, 1)', tag:'WARNING', token:'--aq-color-semantic-warning-base'}
+   ]},
+  {name:'Alert', desc:'Alert colors can communicate that an action could be destructive. These colors are commonly used in confirmations to grab the users\' attention.',
+   swatches:[
+     {aa:'AA 6.21',  hex:'#FFFAEB', hsla:'hsla(45, 100, 96, 1)', tag:'5',      token:'--aq-color-semantic-alert-5'},
+     {aa:'AAA 14.25',hex:'#FFF4CE', hsla:'hsla(45, 100, 93, 1)', tag:'15',     token:'--aq-color-semantic-alert-15'},
+     {aa:'AAA 14.25',hex:'#FFE384', hsla:'hsla(46, 100, 76, 1)', tag:'50',     token:'--aq-color-semantic-alert-50'},
+     {aa:'AAA 7.9',  hex:'#FFC609', hsla:'hsla(45, 100, 52, 1)', tag:'BRIGHT', token:'--aq-color-semantic-alert-bright'},
+     {aa:'AA 4.91',  hex:'#8D6D07', hsla:'hsla(46, 90, 29, 1)',  tag:'ALERT',  token:'--aq-color-semantic-alert-base'}
+   ]},
+  {name:'Success', desc:'Success colors communicate a positive action, positive trend, or a successful confirmation. If you\'re using green as your primary color, it can be helpful to introduce a different hue for your success green.',
+   swatches:[
+     {aa:'AA 5.55',  hex:'#F4FCEE', hsla:'hsla(94, 70, 96, 1)',  tag:'5',       token:'--aq-color-semantic-success-5'},
+     {aa:'AAA 15.62',hex:'#DFF3DD', hsla:'hsla(113, 49, 93, 1)', tag:'15',      token:'--aq-color-semantic-success-15'},
+     {aa:'AAA 15.62',hex:'#AFE2A9', hsla:'hsla(114, 50, 77, 1)', tag:'50',      token:'--aq-color-semantic-success-50'},
+     {aa:'AAA 9.61', hex:'#60C554', hsla:'hsla(114, 49, 55, 1)', tag:'BRIGHT',  token:'--aq-color-semantic-success-bright'},
+     {aa:'AA 5.74',  hex:'#3C7212', hsla:'hsla(94, 73, 26, 1)',  tag:'SUCCESS', token:'--aq-color-semantic-success-base'}
+   ]},
+  {name:'Info', desc:'Info colors communicate a neutral, informational message or a helpful hint. They are used for tips, notices and non-urgent status updates across the interface.',
+   swatches:[
+     {aa:'AA 5.32',  hex:'#EDF7FC', hsla:'hsla(200, 71, 96, 1)', tag:'5',      token:'--aq-color-semantic-info-5'},
+     {aa:'AAA 13.39',hex:'#CEEAF9', hsla:'hsla(199, 76, 92, 1)', tag:'15',     token:'--aq-color-semantic-info-15'},
+     {aa:'AAA 13.39',hex:'#85CBEF', hsla:'hsla(200, 77, 73, 1)', tag:'50',     token:'--aq-color-semantic-info-50'},
+     {aa:'AA 6.57',  hex:'#0C98DF', hsla:'hsla(200, 90, 46, 1)', tag:'BRIGHT', token:'--aq-color-semantic-info-bright'},
+     {aa:'AA 5.79',  hex:'#176C97', hsla:'hsla(200, 74, 34, 1)', tag:'INFO',   token:'--aq-color-semantic-info-base'}
+   ]}
+];
+function semanticColors(){
+  const yiq = h => { const r=parseInt(h.substr(1,2),16), g=parseInt(h.substr(3,2),16), b=parseInt(h.substr(5,2),16); return (r*299+g*587+b*114)/1000; };
+  const rows = SEMANTIC.map(f=>{
+    const accent = f.swatches[3].hex;
+    const cards = f.swatches.map(s=>{
+      const dark = yiq(s.hex) < 165;
+      const txt  = dark ? 'rgba(255,255,255,.92)' : 'rgba(20,20,20,.85)';
+      const sub  = dark ? 'rgba(255,255,255,.6)'  : 'rgba(20,20,20,.5)';
+      const acc  = dark ? 'rgba(255,255,255,.92)' : accent;
+      return `<div class="sc-card" style="background:${s.hex};color:${txt}">
+        <div class="sc-badge" style="color:${acc}"><span class="sc-ico"></span>${s.aa}</div>
+        <div class="sc-foot">
+          <div class="sc-hexrow"><span>${s.hex}</span><span class="sc-tag">${s.tag}</span></div>
+          <div class="sc-sub" style="color:${sub}">${s.hsla}</div>
+          <div class="sc-sub sc-token" style="color:${sub}">${s.token}</div>
+        </div>
+      </div>`;
+    }).join('');
+    return `<div class="sc-row">
+      <div class="sc-info"><h4>${f.name}</h4><p>${f.desc}</p></div>
+      <div class="sc-grid">${cards}</div>
+    </div>`;
+  }).join('');
+  return `<div class="sem-colors">
+    <div class="sem-head"><h4>Semantic Colors</h4><p>Feedback colors emphasize different semantic states. They're used to provide visual feedback and/or warnings to users as they use your interface.</p></div>
+    ${rows}
+  </div>`;
+}
+
+/* ================= typography tokens (Aquarabia design system) ================= */
+const FONT_FAMILY = [
+  {token:'font-family-primary',   en:'Livvic',      ar:'Rubik'},
+  {token:'font-family-secondary', en:'Montserrat',  ar:'Tajawal'},
+  {token:'font-family-display',   en:'Rock Boulder',ar:'Watad'}
+];
+const FONT_WEIGHT = [
+  {token:'font-wgt-300', val:'Light'},
+  {token:'font-wgt-400', val:'Regular'},
+  {token:'font-wgt-600', val:'Semi Bold (Medium for Arabic)'},
+  {token:'font-wgt-700', val:'Bold'},
+  {token:'font-wgt-900', val:'Extrabold'}
+];
+function typographyTokens(){
+  const fam = FONT_FAMILY.map(f=>`<tr>
+      <td class="type-token">${f.token}</td>
+      <td class="type-val">${f.en}</td>
+      <td class="type-val">${f.ar}</td>
+    </tr>`).join('');
+  const wgt = FONT_WEIGHT.map(w=>`<tr>
+      <td class="type-token">${w.token}</td>
+      <td class="type-val">${w.val}</td>
+    </tr>`).join('');
+  return `<div class="type-tokens">
+    <div class="type-block">
+      <h4>Font Family</h4>
+      <table class="type-table">
+        <thead><tr><th>Token Name</th><th>English</th><th>Arabic</th></tr></thead>
+        <tbody>${fam}</tbody>
+      </table>
+    </div>
+    <div class="type-block">
+      <h4>Font Weight</h4>
+      <table class="type-table">
+        <thead><tr><th>Token Name</th><th>Value</th></tr></thead>
+        <tbody>${wgt}</tbody>
+      </table>
+    </div>
+  </div>`;
+}
+
+/* ================= project detail ================= */
+function renderAquarabia(){
+  const B = 'images/aquarabia';
+  const im = (path, ratio, tone) => `<div class="ph tone-${tone} img" style="aspect-ratio:${ratio};${bg(path)}"></div>`;
+  const ext = window.AQ_CONTENT && window.AQ_CONTENT.aquarabia;
+  if(ext){
+    document.getElementById('projectContent').innerHTML =
+      `<div class="proj-head"><h2>Aquarabia</h2><div class="roles">${AQUARABIA.roles.map((r,i)=>(i?'<span class="sep"></span>':'')+`<span>${r}</span>`).join('')}</div></div>` + ext;
+    return;
+  }
+  document.getElementById('projectContent').innerHTML = `
+    <div class="proj-head">
+      <h2>Aquarabia</h2>
+      <div class="roles">${AQUARABIA.roles.map((r,i)=>(i?'<span class="sep"></span>':'')+`<span>${r}</span>`).join('')}</div>
+    </div>
+    <img class="hero-img" src="${B}/Hero.jpeg" alt="Aquarabia">
+    <div class="proj-desc">
+      <p>Aquarabia is the largest water theme park in the Middle East and the first of its kind in Saudi Arabia, located in Qiddiya City — home to 22 unique water rides, five of them record-breaking. The project covered the complete digital ecosystem of the park: a design system built from the brand up, a mobile ticketing experience and a full responsive website.</p>
+      <p>Everything was designed across all breakpoints — mobile, tablet, desktop and large screens — and, since the primary audience is Saudi, conceived right-to-left first: fully mirrored layouts, navigation and iconography, with Arabic typography leading and the English LTR version derived from it.</p>
+    </div>
+    <div class="proj-section">
+      <h3>Design System</h3>
+      <div class="proj-desc">
+        <p>A single source of truth covering logo usage, color and typography, extended into components, spacing and iconography. The system was built bilingual from day one: every token and component works in both Arabic and Latin scripts, in RTL and LTR, without breaking hierarchy or rhythm.</p>
+      </div>
+      ${semanticColors()}
+      ${typographyTokens()}
+    </div>
+    <div class="proj-section">
+      <h3>Elements</h3>
+      <div class="img-grid cols-2">
+        <img src="${B}/graphic elements/Graphic=2.png" loading="lazy" alt="Aquarabia graphic elements">
+        <img src="${B}/graphic elements/Frame 25.png" loading="lazy" alt="Aquarabia graphic elements">
+        <img src="${B}/graphic elements/Frame 25-3.png" loading="lazy" alt="Aquarabia graphic elements">
+        <img src="${B}/graphic elements/Frame 25-4.png" loading="lazy" alt="Aquarabia graphic elements">
+      </div>
+    </div>
+    <div class="proj-section">
+      <h3>Patterns</h3>
+      <div class="img-grid cols-2">
+        <img src="${B}/patterns/Layer_1 2.png" loading="lazy" alt="Aquarabia patterns">
+        <img src="${B}/patterns/Layer_1-1 2.png" loading="lazy" alt="Aquarabia patterns">
+        <img src="${B}/patterns/Layer_1-2 2.png" loading="lazy" alt="Aquarabia patterns">
+        <img src="${B}/patterns/Layer_1-3 2.png" loading="lazy" alt="Aquarabia patterns">
+      </div>
+    </div>
+    <div class="proj-section">
+      <h3>Cards</h3>
+      <div class="img-grid cols-3" style="gap:clamp(24px,3.5vw,52px)">
+        <img src="${B}/cards/MapSection.png" loading="lazy" alt="Aquarabia cards">
+        <img src="${B}/cards/MapSection-1.png" loading="lazy" alt="Aquarabia cards">
+        <img src="${B}/cards/MapSection-2.png" loading="lazy" alt="Aquarabia cards">
+        <img src="${B}/cards/MapSection-3.png" loading="lazy" alt="Aquarabia cards">
+        <img src="${B}/cards/MapSection-4.png" loading="lazy" alt="Aquarabia cards">
+        <img src="${B}/cards/MapSection-5.png" loading="lazy" alt="Aquarabia cards">
+      </div>
+    </div>
+    <div class="proj-section">
+      <h3>Lands</h3>
+      <div class="lands-row">
+        <img src="${B}/lands/land.jpeg" style="width:100%" loading="lazy" alt="Aquarabia lands">
+      </div>
+    </div>
+    <div class="proj-section">
+      <h3>Mobile App — Tickets &amp; Checkout</h3>
+      <div class="proj-desc">
+        <p>The app focuses on the two highest-intent flows: buying tickets and checking out. Ticket types, dates and add-ons were compressed into a short, glanceable flow, with a checkout designed for one-handed use, local payment methods and full Arabic RTL support.</p>
+      </div>
+      <div class="img-grid cols-1">
+        <img src="${B}/04.jpeg" loading="lazy" alt="Aquarabia mobile app — tickets &amp; checkout">
+        <img src="${B}/05.jpeg" loading="lazy" alt="Aquarabia mobile app — tickets &amp; checkout">
+      </div>
+    </div>
+    <div class="proj-section">
+      <h3>Website</h3>
+      <div class="proj-desc">
+        <p>The website spans the home experience, ticketing, checkout and the My Profile dashboard — where visitors manage tickets, bookings and personal details. Each template was designed for every breakpoint, mirrored for RTL, and stress-tested with real Arabic and English content.</p>
+      </div>
+      <div class="img-grid cols-2">
+        ${im(B+'/web/home','16/10',2)}
+        ${im(B+'/web/tickets','16/10',4)}
+        ${im(B+'/web/checkout','16/10',6)}
+        ${im(B+'/web/dashboard','16/10',1)}
+      </div>
+    </div>
+    <div class="proj-section">
+      <h3>Breakpoints &amp; RTL</h3>
+      <div class="proj-desc">
+        <p>Every layout was defined across the full breakpoint range, from small mobile to widescreen. The right-to-left adaptation went beyond mirroring: reading order, gestures, number formatting, date pickers and imagery direction were all reviewed specifically for the Saudi audience.</p>
+      </div>
+      ${im(B+'/rtl-breakpoints','16/7',3)}
+    </div>`;
+}
+
+/* ================= Six Flags full design system ================= */
+const SF_YIQ = h => { const r=parseInt(h.substr(1,2),16),g=parseInt(h.substr(3,2),16),b=parseInt(h.substr(5,2),16); return (r*299+g*587+b*114)/1000; };
+function sfCards(swatches){
+  return swatches.map(s=>{
+    const dark = SF_YIQ(s.hex) < 165;
+    const txt = dark ? 'rgba(255,255,255,.92)' : 'rgba(20,20,20,.8)';
+    return `<div class="sf-chip" style="background:${s.hex};color:${txt}" title="${s.tag} · ${s.token}"><span>${s.hex}</span></div>`;
+  }).join('');
+}
+function sfRow(name, desc, swatches, ns, ds){
+  return `<div class="ds-row"><div class="sc-info"><h4${ns?` style="${ns}"`:''}>${name}</h4>${desc?`<p${ds?` style="${ds}"`:''}>${desc}</p>`:''}</div><div class="ds-grid">${sfCards(swatches)}</div></div>`;
+}
+const sw = (aa,hex,hsla,tag,token) => ({aa,hex,hsla,tag,token});
+const SF_DS = {
+  brand:[
+    sfRow('Primary','',[
+      sw('AAA 15.8','#DEE0E8','hsla(228, 18%, 89%, 1)','15','--sf-color-primary-15'),
+      sw('AAA 11.38','#BEC1D1','hsla(231, 17%, 78%, 1)','30','--sf-color-primary-30'),
+      sw('AAA 13.01','#253066','hsla(230, 47%, 27%, 1)','BASE','--sf-color-primary-base'),
+      sw('AAA 14','#122E44','hsla(206, 58%, 17%, 1)','DARK','--sf-color-primary-dark'),
+      sw('AAA 16.42','#00213A','hsla(206, 100%, 11%, 1)','DARK THEME BASE','--sf-color-primary-darktheme')
+    ]),
+    sfRow('Secondary','',[
+      sw('AAA 16.54','#FCDDDE','hsla(358, 84%, 93%, 1)','15','--sf-color-secondary-15'),
+      sw('AAA 12.91','#FABBBD','hsla(358, 86%, 86%, 1)','30','--sf-color-secondary-30'),
+      sw('AA 4.79','#ED1D25','hsla(358, 85%, 52%, 1)','BASE','--sf-color-secondary-base'),
+      sw('AAA 11.1','#7B0A0E','hsla(358, 85%, 26%, 1)','DARK','--sf-color-secondary-dark'),
+      sw('AA 5.77','#FF323A','hsla(358, 100%, 60%, 1)','DARK THEME BASE','--sf-color-secondary-darktheme')
+    ]),
+    sfRow('BG-App','Use when there is no meaning tied to the color.',[
+      sw('AAA 19.13','#F0F5F9','hsla(207, 43%, 96%, 1)','bg-app','--sf-color-bgapp')
+    ])
+  ],
+  accents:[
+    sfRow('Accent 1','Use when there is no meaning tied to the color.',[
+      sw('AAA 20.1','#F5FBFD','hsla(195, 67%, 98%, 1)','5','--sf-color-accent1-5'),
+      sw('AAA 19.15','#ECF6FC','hsla(203, 73%, 96%, 1)','10','--sf-color-accent1-10'),
+      sw('AAA 18.32','#E2F2FA','hsla(200, 71%, 93%, 1)','15','--sf-color-accent1-15'),
+      sw('AAA 15.91','#C5E5F6','hsla(201, 73%, 87%, 1)','30','--sf-color-accent1-30'),
+      sw('AAA 15.91','#9FD4EF','hsla(200, 71%, 78%, 1)','50','--sf-color-accent1-50'),
+      sw('AAA 7.96','#3FA9E0','hsla(200, 72%, 56%, 1)','BASE','--sf-color-accent1-base'),
+      sw('AAA 7.74','#14587B','hsla(200, 72%, 28%, 1)','DARK','--sf-color-accent1-dark'),
+      sw('AAA 8.66','#64AEDF','hsla(204, 66%, 63%, 1)','CITY BASE','--sf-color-accent1-citybase'),
+      sw('AAA 11.57','#A0C4E9','hsla(210, 62%, 77%, 1)','CITY ALT','--sf-color-accent1-cityalt')
+    ]),
+    sfRow('Accent 2','Use when there is no meaning tied to the color.',[
+      sw('AAA 20.21','#F7FCF6','hsla(110, 50%, 98%, 1)','5','--sf-color-accent2-5'),
+      sw('AAA 19.34','#F0F8EC','hsla(100, 46%, 95%, 1)','10','--sf-color-accent2-10'),
+      sw('AAA 18.63','#E9F5E3','hsla(100, 47%, 93%, 1)','15','--sf-color-accent2-15'),
+      sw('AAA 16.45','#D2EBC7','hsla(102, 47%, 85%, 1)','30','--sf-color-accent2-30'),
+      sw('AAA 16.45','#B4DEA2','hsla(102, 48%, 75%, 1)','50','--sf-color-accent2-50'),
+      sw('AAA 8.97','#6ABD46','hsla(102, 48%, 51%, 1)','BASE','--sf-color-accent2-base'),
+      sw('AAA 7.87','#3F5927','hsla(91, 39%, 25%, 1)','DARK','--sf-color-accent2-dark'),
+      sw('AA 5.72','#6B904D','hsla(93, 30%, 43%, 1)','VALLEY BASE','--sf-color-accent2-valleybase'),
+      sw('AAA 10.33','#8FC476','hsla(101, 40%, 62%, 1)','VALLEY ALT','--sf-color-accent2-valleyalt')
+    ]),
+    sfRow('Accent 3','Use when there is no meaning tied to the color.',[
+      sw('AAA 19.71','#F9F7FA','hsla(280, 23%, 97%, 1)','5','--sf-color-accent3-5'),
+      sw('AAA 18.36','#F3EEF5','hsla(283, 23%, 95%, 1)','10','--sf-color-accent3-10'),
+      sw('AAA 17.18','#EDE6F0','hsla(282, 25%, 92%, 1)','15','--sf-color-accent3-15'),
+      sw('AAA 13.83','#DBCDE1','hsla(282, 25%, 84%, 1)','30','--sf-color-accent3-30'),
+      sw('AAA 13.83','#C3ACCD','hsla(282, 25%, 74%, 1)','50','--sf-color-accent3-50'),
+      sw('AA 5.28','#885A9A','hsla(283, 26%, 48%, 1)','BASE','--sf-color-accent3-base'),
+      sw('AAA 9.27','#5F3674','hsla(280, 36%, 33%, 1)','DARK','--sf-color-accent3-dark'),
+      sw('AA 4.51','#9D5DA1','hsla(296, 27%, 50%, 1)','GARDENS BASE','--sf-color-accent3-gardensbase'),
+      sw('AA 5.85','#AB74AF','hsla(296, 27%, 57%, 1)','GARDENS ALT','--sf-color-accent3-gardensalt')
+    ]),
+    sfRow('Accent 4','Use when there is no meaning tied to the color.',[
+      sw('AAA 19.46','#F2F7FA','hsla(202, 44%, 96%, 1)','5','--sf-color-accent4-5'),
+      sw('AAA 17.89','#E5EEF6','hsla(208, 49%, 93%, 1)','10','--sf-color-accent4-10'),
+      sw('AAA 16.54','#D9E6F1','hsla(207, 46%, 90%, 1)','15','--sf-color-accent4-15'),
+      sw('AAA 12.73','#B2CDE3','hsla(207, 47%, 79%, 1)','30','--sf-color-accent4-30'),
+      sw('AAA 12.73','#80ACD0','hsla(207, 46%, 66%, 1)','50','--sf-color-accent4-50'),
+      sw('AAA 7.13','#0059A1','hsla(207, 100%, 32%, 1)','BASE','--sf-color-accent4-base'),
+      sw('AAA 14.03','#002E52','hsla(206, 100%, 16%, 1)','DARK','--sf-color-accent4-dark'),
+      sw('AA 6.54','#2898D5','hsla(201, 68%, 50%, 1)','DISCOVER BASE','--sf-color-accent4-discoverbase'),
+      sw('AAA 8.66','#64AEDF','hsla(204, 66%, 63%, 1)','DISCOVER ALT','--sf-color-accent4-discoveralt')
+    ]),
+    sfRow('Accent Plus 1','Use when there is no meaning tied to the color.',[
+      sw('AAA 20.47','#FFFDF1','hsla(46, 100%, 98%, 1)','5','--sf-color-accentplus1-5'),
+      sw('AAA 19.94','#FFF9E6','hsla(46, 100%, 95%, 1)','10','--sf-color-accentplus1-10'),
+      sw('AAA 19.45','#FFF4D1','hsla(46, 100%, 91%, 1)','15','--sf-color-accentplus1-15'),
+      sw('AAA 18.15','#FFE58F','hsla(46, 100%, 78%, 1)','30','--sf-color-accentplus1-30'),
+      sw('AAA 18.15','#FFE384','hsla(46, 100%, 76%, 1)','50','--sf-color-accentplus1-50'),
+      sw('AAA 13.33','#FFC609','hsla(46, 100%, 52%, 1)','BASE','--sf-color-accentplus1-base'),
+      sw('AA 5.3','#8E6325','hsla(35, 59%, 35%, 1)','DARK','--sf-color-accentplus1-dark'),
+      sw('AAA 13.33','#FFC609','hsla(46, 100%, 52%, 1)','GRAND BASE','--sf-color-accentplus1-grandbase'),
+      sw('AAA 14.75','#FFD442','hsla(46, 100%, 63%, 1)','GRAND ALT','--sf-color-accentplus1-grandalt')
+    ]),
+    sfRow('Accent Plus 2','Use when there is no meaning tied to the color.',[
+      sw('AAA 19.95','#FEF8F4','hsla(24, 83%, 98%, 1)','5','--sf-color-accentplus2-5'),
+      sw('AAA 19.09','#FEF2E9','hsla(26, 91%, 95%, 1)','10','--sf-color-accentplus2-10'),
+      sw('AAA 18.11','#FDEBDE','hsla(25, 89%, 93%, 1)','15','--sf-color-accentplus2-15'),
+      sw('AAA 15.69','#FCD8BC','hsla(26, 91%, 86%, 1)','30','--sf-color-accentplus2-30'),
+      sw('AAA 15.69','#F9BD8F','hsla(26, 90%, 77%, 1)','50','--sf-color-accentplus2-50'),
+      sw('AAA 7.75','#F47C20','hsla(26, 91%, 54%, 1)','BASE','--sf-color-accentplus2-base'),
+      sw('AAA 7.97','#833D06','hsla(26, 91%, 27%, 1)','DARK','--sf-color-accentplus2-dark'),
+      sw('AAA 7.16','#EC7603','hsla(30, 97%, 47%, 1)','STEAM BASE','--sf-color-accentplus2-steambase'),
+      sw('AAA 8.45','#ED8D2C','hsla(30, 84%, 55%, 1)','STEAM ALT','--sf-color-accentplus2-steamalt')
+    ]),
+    sfRow('Accent Plus 3 · Extra Land','Color used for Extra Land land and its related components. Use when there is no meaning tied to the color.',[
+      sw('AAA 13.41','#FDFDFC','hsla(37, 32%, 87%, 0.05)','5','--sf-color-accentplus3-5'),
+      sw('AAA 13.41','#F8F6F2','hsla(37, 32%, 87%, 0.1)','10','--sf-color-accentplus3-10'),
+      sw('AAA 20.31','#F2EEE6','hsla(37, 32%, 87%, 0.15)','15','--sf-color-accentplus3-15'),
+      sw('AAA 19.46','#E9E1D4','hsla(37, 32%, 87%, 0.3)','30','--sf-color-accentplus3-30'),
+      sw('AAA 18.49','#D0BFA4','hsla(37, 32%, 87%, 0.5)','50','--sf-color-accentplus3-50'),
+      sw('AAA 16.19','#AE9060','hsla(37, 32%, 87%, 1)','BASE','--sf-color-accentplus3-base'),
+      sw('AAA 16.19','#6C5837','hsla(37, 32%, 87%, 1)','DARK','--sf-color-accentplus3-dark')
+    ])
+  ],
+  semantic:[
+    sfRow('Error','Error colors are used across error states and in "destructive" actions. They communicate a destructive/negative action, such as removing a user from your team.',[
+      sw('AA 5.52','#FCEEED','hsla(4, 75%, 96%, 1)','5','--sf-color-semantic-error-5'),
+      sw('AAA 10.88','#EFA9A4','hsla(4, 70%, 79%, 1)','20','--sf-color-semantic-error-20'),
+      sw('AA 5.52','#BA251C','hsla(3, 74%, 42%, 1)','ERROR','--sf-color-semantic-error-base')
+    ]),
+    sfRow('Warning','Warning colors can communicate that an action is potentially destructive or "on-hold". These colors are commonly used in confirmations to grab the users\' attention.',[
+      sw('AA 4.91','#FDF4ED','hsla(27, 83%, 96%, 1)','5','--sf-color-semantic-warning-5'),
+      sw('AAA 14.25','#F2E5DB','hsla(26, 47%, 90%, 1)','15','--sf-color-semantic-warning-15'),
+      sw('AAA 14.25','#F9CCAA','hsla(26, 87%, 82%, 1)','20','--sf-color-semantic-warning-20'),
+      sw('AA 4.91','#A85410','hsla(27, 83%, 36%, 1)','WARNING','--sf-color-semantic-warning-base')
+    ]),
+    sfRow('Success','Success colors communicate a positive action, positive trend, or a successful confirmation. If you\'re using green as your primary color, it can be helpful to introduce a different hue for your success green.',[
+      sw('AA 5.74','#F4FCEE','hsla(94, 70%, 96%, 1)','5','--sf-color-semantic-success-5'),
+      sw('AA 5.17','#E9F5E3','hsla(100, 47%, 93%, 1)','15','--sf-color-semantic-success-15'),
+      sw('AAA 15.62','#D1E8C0','hsla(94, 46%, 83%, 1)','20','--sf-color-semantic-success-20'),
+      sw('AAA 8.97','#69BD45','hsla(102, 48%, 51%, 1)','100','--sf-color-semantic-success-100'),
+      sw('AA 5.74','#3C7212','hsla(94, 73%, 26%, 1)','SUCCESS','--sf-color-semantic-success-base')
+    ]),
+    sfRow('Info','Info colors communicate a neutral, informational message or a helpful hint. They are used for tips, notices and non-urgent status updates.',[
+      sw('AA 5.32','#EDF7FC','hsla(200, 74%, 96%, 1)','5','--sf-color-semantic-info-5'),
+      sw('AAA 13.39','#A1D6F0','hsla(200, 72%, 79%, 1)','20','--sf-color-semantic-info-20'),
+      sw('AA 5.32','#176C97','hsla(200, 74%, 34%, 1)','INFO','--sf-color-semantic-info-base')
+    ])
+  ]
+};
+function sixflagsDesignSystem(){
+  const typo = [
+    {lbl:'Primary · English', name:'Outfit', font:"'Outfit',sans-serif", spec:'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789'},
+    {lbl:'Secondary · English', name:'Proxima Nova', font:"'DM Sans',sans-serif", spec:'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789'},
+    {lbl:'Arabic', name:'URW Geometric Arabic', font:"'DM Sans',sans-serif", spec:'ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي ٩٨٧٦٥٤٣٢١٠'}
+  ].map(t=>`<div class="ds-type-row">
+      <div class="lbl">${t.lbl}</div>
+      <div class="ds-type-name" style="font-family:${t.font}">${t.name}</div>
+      <div class="ds-type-spec" style="font-family:${t.font}">${t.spec}</div>
+    </div>`).join('');
+  return `
+    <div class="ds-section">
+      <div class="ds-title">Brand Colors</div>
+      ${SF_DS.brand.join('')}
+    </div>
+    <div class="ds-section">
+      <div class="ds-title">Accent &amp; Park Colors</div>
+      <p class="ds-intro">Neutral-to-vivid ramps for each accent family, plus park-specific base/alt colors tied to each land.</p>
+      ${SF_DS.accents.join('')}
+    </div>
+    <div class="ds-section">
+      <div class="ds-title">Special Colors</div>
+      <p class="ds-intro">These specific colors were derived from Gravitas designs but are not included in the defined color palette outlined in the brand book. Semantic colors emphasize different states, providing visual feedback and warnings.</p>
+      ${SF_DS.semantic.join('')}
+    </div>
+    <div class="ds-section">
+      <div class="ds-title">Typography</div>
+      <p class="ds-intro">A constrained, purposeful set of typographic styles mapped to functional roles, bilingual across Latin and Arabic scripts.</p>
+      ${typo}
+    </div>`;
+}
+
+function renderSixflags(){
+  const B = 'images/sixflags';
+  const im = (path, ratio, tone) => `<div class="ph tone-${tone} img" style="aspect-ratio:${ratio};${bg(path)}"></div>`;
+  const ext = window.AQ_CONTENT && window.AQ_CONTENT.sixflags;
+  if(ext){
+    document.getElementById('projectContent').innerHTML =
+      `<div class="proj-head"><h2>Six Flags Qiddiya</h2><div class="roles">${SIXFLAGS.roles.map((r,i)=>(i?'<span class="sep"></span>':'')+`<span>${r}</span>`).join('')}</div></div>` + ext;
+    return;
+  }
+  document.getElementById('projectContent').innerHTML = `
+    <div class="proj-head">
+      <h2>Six Flags Qiddiya</h2>
+      <div class="roles">${SIXFLAGS.roles.map((r,i)=>(i?'<span class="sep"></span>':'')+`<span>${r}</span>`).join('')}</div>
+    </div>
+    <div class="hero ph tone-3 img" style="${bg(B+'/hero')}"></div>
+<div class="proj-section">
+  <h3 style="font-size:11px">PROJECT OVERVIEW</h3>
+</div>
+<div class="proj-section">
+  <div class="img-grid cols-1 dyn" style="--rh:220px">
+    <img style="grid-column:span 1;grid-row:span 3" src="images/sixflags/03.jpg" loading="lazy" alt="">
+  </div>
+</div>
+<div class="proj-section hasbg" style="background:#F0F5F9">
+  <div class="proj-desc"><p style="font-size:17px">I designed the UX/UI experience for the Six Flags Qiddiya City digital platform in collaboration with Globant, covering both web and mobile applications. The entire product was created with a right-to-left (RTL) approach, adapting its architecture, components, and interactions to deliver an intuitive, accessible, and culturally relevant experience.</p></div>
+</div>
+<div class="proj-section">
+  <div class="img-grid cols-1">
+    <img src="images/sixflags/01.jpg" loading="lazy" alt="">
+  </div>
+</div>
+<div class="proj-section">
+  <div class="ds-section">
+    <div class="ds-title">Brand Colors</div>
+    <div class="ds-row"><div class="sc-info"><h4>Primary</h4></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#DEE0E8;color:rgba(20,20,20,.8)" title="15 · --sf-color-primary-15"><span>#DEE0E8</span></div>
+        <div class="sf-chip" style="background:#BEC1D1;color:rgba(20,20,20,.8)" title="30 · --sf-color-primary-30"><span>#BEC1D1</span></div>
+        <div class="sf-chip" style="background:#253066;color:rgba(255,255,255,.92)" title="BASE · --sf-color-primary-base"><span>#253066</span></div>
+        <div class="sf-chip" style="background:#122E44;color:rgba(255,255,255,.92)" title="DARK · --sf-color-primary-dark"><span>#122E44</span></div>
+        <div class="sf-chip" style="background:#00213A;color:rgba(255,255,255,.92)" title="DARK THEME BASE · --sf-color-primary-darktheme"><span>#00213A</span></div>
+      </div></div>
+    <div class="ds-row"><div class="sc-info"><h4>Secondary</h4></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#FCDDDE;color:rgba(20,20,20,.8)" title="15 · --sf-color-secondary-15"><span>#FCDDDE</span></div>
+        <div class="sf-chip" style="background:#FABBBD;color:rgba(20,20,20,.8)" title="30 · --sf-color-secondary-30"><span>#FABBBD</span></div>
+        <div class="sf-chip" style="background:#ED1D25;color:rgba(255,255,255,.92)" title="BASE · --sf-color-secondary-base"><span>#ED1D25</span></div>
+        <div class="sf-chip" style="background:#7B0A0E;color:rgba(255,255,255,.92)" title="DARK · --sf-color-secondary-dark"><span>#7B0A0E</span></div>
+        <div class="sf-chip" style="background:#FF323A;color:rgba(255,255,255,.92)" title="DARK THEME BASE · --sf-color-secondary-darktheme"><span>#FF323A</span></div>
+      </div></div>
+    <div class="ds-row"><div class="sc-info"><h4>BG-App</h4><p>Use when there is no meaning tied to the color.</p></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#F0F5F9;color:rgba(20,20,20,.8)" title="bg-app · --sf-color-bgapp"><span>#F0F5F9</span></div>
+      </div></div>
+  </div>
+</div>
+<div class="proj-section">
+  <div class="ds-section">
+    <div class="ds-title">Accent &amp; Park Colors</div>
+    <p class="ds-intro">Neutral-to-vivid ramps for each accent family, plus park-specific base/alt colors tied to each land.</p>
+    <div class="ds-row"><div class="sc-info"><h4>Accent 1</h4><p>Use when there is no meaning tied to the color.</p></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#F5FBFD;color:rgba(20,20,20,.8)" title="5 · --sf-color-accent1-5"><span>#F5FBFD</span></div>
+        <div class="sf-chip" style="background:#ECF6FC;color:rgba(20,20,20,.8)" title="10 · --sf-color-accent1-10"><span>#ECF6FC</span></div>
+        <div class="sf-chip" style="background:#E2F2FA;color:rgba(20,20,20,.8)" title="15 · --sf-color-accent1-15"><span>#E2F2FA</span></div>
+        <div class="sf-chip" style="background:#C5E5F6;color:rgba(20,20,20,.8)" title="30 · --sf-color-accent1-30"><span>#C5E5F6</span></div>
+        <div class="sf-chip" style="background:#9FD4EF;color:rgba(20,20,20,.8)" title="50 · --sf-color-accent1-50"><span>#9FD4EF</span></div>
+        <div class="sf-chip" style="background:#3FA9E0;color:rgba(255,255,255,.92)" title="BASE · --sf-color-accent1-base"><span>#3FA9E0</span></div>
+        <div class="sf-chip" style="background:#14587B;color:rgba(255,255,255,.92)" title="DARK · --sf-color-accent1-dark"><span>#14587B</span></div>
+        <div class="sf-chip" style="background:#64AEDF;color:rgba(255,255,255,.92)" title="CITY BASE · --sf-color-accent1-citybase"><span>#64AEDF</span></div>
+        <div class="sf-chip" style="background:#A0C4E9;color:rgba(20,20,20,.8)" title="CITY ALT · --sf-color-accent1-cityalt"><span>#A0C4E9</span></div>
+      </div></div>
+    <div class="ds-row"><div class="sc-info"><h4>Accent 2</h4><p>Use when there is no meaning tied to the color.</p></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#F7FCF6;color:rgba(20,20,20,.8)" title="5 · --sf-color-accent2-5"><span>#F7FCF6</span></div>
+        <div class="sf-chip" style="background:#F0F8EC;color:rgba(20,20,20,.8)" title="10 · --sf-color-accent2-10"><span>#F0F8EC</span></div>
+        <div class="sf-chip" style="background:#E9F5E3;color:rgba(20,20,20,.8)" title="15 · --sf-color-accent2-15"><span>#E9F5E3</span></div>
+        <div class="sf-chip" style="background:#D2EBC7;color:rgba(20,20,20,.8)" title="30 · --sf-color-accent2-30"><span>#D2EBC7</span></div>
+        <div class="sf-chip" style="background:#B4DEA2;color:rgba(20,20,20,.8)" title="50 · --sf-color-accent2-50"><span>#B4DEA2</span></div>
+        <div class="sf-chip" style="background:#6ABD46;color:rgba(255,255,255,.92)" title="BASE · --sf-color-accent2-base"><span>#6ABD46</span></div>
+        <div class="sf-chip" style="background:#3F5927;color:rgba(255,255,255,.92)" title="DARK · --sf-color-accent2-dark"><span>#3F5927</span></div>
+        <div class="sf-chip" style="background:#6B904D;color:rgba(255,255,255,.92)" title="VALLEY BASE · --sf-color-accent2-valleybase"><span>#6B904D</span></div>
+        <div class="sf-chip" style="background:#8FC476;color:rgba(20,20,20,.8)" title="VALLEY ALT · --sf-color-accent2-valleyalt"><span>#8FC476</span></div>
+      </div></div>
+    <div class="ds-row"><div class="sc-info"><h4>Accent 3</h4><p>Use when there is no meaning tied to the color.</p></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#F9F7FA;color:rgba(20,20,20,.8)" title="5 · --sf-color-accent3-5"><span>#F9F7FA</span></div>
+        <div class="sf-chip" style="background:#F3EEF5;color:rgba(20,20,20,.8)" title="10 · --sf-color-accent3-10"><span>#F3EEF5</span></div>
+        <div class="sf-chip" style="background:#EDE6F0;color:rgba(20,20,20,.8)" title="15 · --sf-color-accent3-15"><span>#EDE6F0</span></div>
+        <div class="sf-chip" style="background:#DBCDE1;color:rgba(20,20,20,.8)" title="30 · --sf-color-accent3-30"><span>#DBCDE1</span></div>
+        <div class="sf-chip" style="background:#C3ACCD;color:rgba(20,20,20,.8)" title="50 · --sf-color-accent3-50"><span>#C3ACCD</span></div>
+        <div class="sf-chip" style="background:#885A9A;color:rgba(255,255,255,.92)" title="BASE · --sf-color-accent3-base"><span>#885A9A</span></div>
+        <div class="sf-chip" style="background:#5F3674;color:rgba(255,255,255,.92)" title="DARK · --sf-color-accent3-dark"><span>#5F3674</span></div>
+        <div class="sf-chip" style="background:#9D5DA1;color:rgba(255,255,255,.92)" title="GARDENS BASE · --sf-color-accent3-gardensbase"><span>#9D5DA1</span></div>
+        <div class="sf-chip" style="background:#AB74AF;color:rgba(255,255,255,.92)" title="GARDENS ALT · --sf-color-accent3-gardensalt"><span>#AB74AF</span></div>
+      </div></div>
+    <div class="ds-row"><div class="sc-info"><h4>Accent 4</h4><p>Use when there is no meaning tied to the color.</p></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#F2F7FA;color:rgba(20,20,20,.8)" title="5 · --sf-color-accent4-5"><span>#F2F7FA</span></div>
+        <div class="sf-chip" style="background:#E5EEF6;color:rgba(20,20,20,.8)" title="10 · --sf-color-accent4-10"><span>#E5EEF6</span></div>
+        <div class="sf-chip" style="background:#D9E6F1;color:rgba(20,20,20,.8)" title="15 · --sf-color-accent4-15"><span>#D9E6F1</span></div>
+        <div class="sf-chip" style="background:#B2CDE3;color:rgba(20,20,20,.8)" title="30 · --sf-color-accent4-30"><span>#B2CDE3</span></div>
+        <div class="sf-chip" style="background:#80ACD0;color:rgba(255,255,255,.92)" title="50 · --sf-color-accent4-50"><span>#80ACD0</span></div>
+        <div class="sf-chip" style="background:#0059A1;color:rgba(255,255,255,.92)" title="BASE · --sf-color-accent4-base"><span>#0059A1</span></div>
+        <div class="sf-chip" style="background:#002E52;color:rgba(255,255,255,.92)" title="DARK · --sf-color-accent4-dark"><span>#002E52</span></div>
+        <div class="sf-chip" style="background:#2898D5;color:rgba(255,255,255,.92)" title="DISCOVER BASE · --sf-color-accent4-discoverbase"><span>#2898D5</span></div>
+        <div class="sf-chip" style="background:#64AEDF;color:rgba(255,255,255,.92)" title="DISCOVER ALT · --sf-color-accent4-discoveralt"><span>#64AEDF</span></div>
+      </div></div>
+    <div class="ds-row"><div class="sc-info"><h4>Accent Plus 1</h4><p>Use when there is no meaning tied to the color.</p></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#FFFDF1;color:rgba(20,20,20,.8)" title="5 · --sf-color-accentplus1-5"><span>#FFFDF1</span></div>
+        <div class="sf-chip" style="background:#FFF9E6;color:rgba(20,20,20,.8)" title="10 · --sf-color-accentplus1-10"><span>#FFF9E6</span></div>
+        <div class="sf-chip" style="background:#FFF4D1;color:rgba(20,20,20,.8)" title="15 · --sf-color-accentplus1-15"><span>#FFF4D1</span></div>
+        <div class="sf-chip" style="background:#FFE58F;color:rgba(20,20,20,.8)" title="30 · --sf-color-accentplus1-30"><span>#FFE58F</span></div>
+        <div class="sf-chip" style="background:#FFE384;color:rgba(20,20,20,.8)" title="50 · --sf-color-accentplus1-50"><span>#FFE384</span></div>
+        <div class="sf-chip" style="background:#FFC609;color:rgba(20,20,20,.8)" title="BASE · --sf-color-accentplus1-base"><span>#FFC609</span></div>
+        <div class="sf-chip" style="background:#8E6325;color:rgba(255,255,255,.92)" title="DARK · --sf-color-accentplus1-dark"><span>#8E6325</span></div>
+        <div class="sf-chip" style="background:#FFC609;color:rgba(20,20,20,.8)" title="GRAND BASE · --sf-color-accentplus1-grandbase"><span>#FFC609</span></div>
+        <div class="sf-chip" style="background:#FFD442;color:rgba(20,20,20,.8)" title="GRAND ALT · --sf-color-accentplus1-grandalt"><span>#FFD442</span></div>
+      </div></div>
+    <div class="ds-row"><div class="sc-info"><h4>Accent Plus 2</h4><p>Use when there is no meaning tied to the color.</p></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#FEF8F4;color:rgba(20,20,20,.8)" title="5 · --sf-color-accentplus2-5"><span>#FEF8F4</span></div>
+        <div class="sf-chip" style="background:#FEF2E9;color:rgba(20,20,20,.8)" title="10 · --sf-color-accentplus2-10"><span>#FEF2E9</span></div>
+        <div class="sf-chip" style="background:#FDEBDE;color:rgba(20,20,20,.8)" title="15 · --sf-color-accentplus2-15"><span>#FDEBDE</span></div>
+        <div class="sf-chip" style="background:#FCD8BC;color:rgba(20,20,20,.8)" title="30 · --sf-color-accentplus2-30"><span>#FCD8BC</span></div>
+        <div class="sf-chip" style="background:#F9BD8F;color:rgba(20,20,20,.8)" title="50 · --sf-color-accentplus2-50"><span>#F9BD8F</span></div>
+        <div class="sf-chip" style="background:#F47C20;color:rgba(255,255,255,.92)" title="BASE · --sf-color-accentplus2-base"><span>#F47C20</span></div>
+        <div class="sf-chip" style="background:#833D06;color:rgba(255,255,255,.92)" title="DARK · --sf-color-accentplus2-dark"><span>#833D06</span></div>
+        <div class="sf-chip" style="background:#EC7603;color:rgba(255,255,255,.92)" title="STEAM BASE · --sf-color-accentplus2-steambase"><span>#EC7603</span></div>
+        <div class="sf-chip" style="background:#ED8D2C;color:rgba(255,255,255,.92)" title="STEAM ALT · --sf-color-accentplus2-steamalt"><span>#ED8D2C</span></div>
+      </div></div>
+    <div class="ds-row"><div class="sc-info"><h4>Accent Plus 3 · Extra Land</h4><p>Color used for Extra Land land and its related components. Use when there is no meaning tied to the color.</p></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#FDFDFC;color:rgba(20,20,20,.8)" title="5 · --sf-color-accentplus3-5"><span>#FDFDFC</span></div>
+        <div class="sf-chip" style="background:#F8F6F2;color:rgba(20,20,20,.8)" title="10 · --sf-color-accentplus3-10"><span>#F8F6F2</span></div>
+        <div class="sf-chip" style="background:#F2EEE6;color:rgba(20,20,20,.8)" title="15 · --sf-color-accentplus3-15"><span>#F2EEE6</span></div>
+        <div class="sf-chip" style="background:#E9E1D4;color:rgba(20,20,20,.8)" title="30 · --sf-color-accentplus3-30"><span>#E9E1D4</span></div>
+        <div class="sf-chip" style="background:#D0BFA4;color:rgba(20,20,20,.8)" title="50 · --sf-color-accentplus3-50"><span>#D0BFA4</span></div>
+        <div class="sf-chip" style="background:#AE9060;color:rgba(255,255,255,.92)" title="BASE · --sf-color-accentplus3-base"><span>#AE9060</span></div>
+        <div class="sf-chip" style="background:#6C5837;color:rgba(255,255,255,.92)" title="DARK · --sf-color-accentplus3-dark"><span>#6C5837</span></div>
+      </div></div>
+  </div>
+</div>
+<div class="proj-section">
+  <div class="ds-section">
+    <div class="ds-title">Special Colors</div>
+    <p class="ds-intro">These specific colors were derived from Gravitas designs but are not included in the defined color palette outlined in the brand book. Semantic colors emphasize different states, providing visual feedback and warnings.</p>
+    <div class="ds-row"><div class="sc-info"><h4>Error</h4><p>Error colors are used across error states and in "destructive" actions. They communicate a destructive/negative action, such as removing a user from your team.</p></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#FCEEED;color:rgba(20,20,20,.8)" title="5 · --sf-color-semantic-error-5"><span>#FCEEED</span></div>
+        <div class="sf-chip" style="background:#EFA9A4;color:rgba(20,20,20,.8)" title="20 · --sf-color-semantic-error-20"><span>#EFA9A4</span></div>
+        <div class="sf-chip" style="background:#BA251C;color:rgba(255,255,255,.92)" title="ERROR · --sf-color-semantic-error-base"><span>#BA251C</span></div>
+      </div></div>
+    <div class="ds-row"><div class="sc-info"><h4>Warning</h4><p>Warning colors can communicate that an action is potentially destructive or "on-hold". These colors are commonly used in confirmations to grab the users' attention.</p></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#FDF4ED;color:rgba(20,20,20,.8)" title="5 · --sf-color-semantic-warning-5"><span>#FDF4ED</span></div>
+        <div class="sf-chip" style="background:#F2E5DB;color:rgba(20,20,20,.8)" title="15 · --sf-color-semantic-warning-15"><span>#F2E5DB</span></div>
+        <div class="sf-chip" style="background:#F9CCAA;color:rgba(20,20,20,.8)" title="20 · --sf-color-semantic-warning-20"><span>#F9CCAA</span></div>
+        <div class="sf-chip" style="background:#A85410;color:rgba(255,255,255,.92)" title="WARNING · --sf-color-semantic-warning-base"><span>#A85410</span></div>
+      </div></div>
+    <div class="ds-row"><div class="sc-info"><h4>Success</h4><p>Success colors communicate a positive action, positive trend, or a successful confirmation. If you're using green as your primary color, it can be helpful to introduce a different hue for your success green.</p></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#F4FCEE;color:rgba(20,20,20,.8)" title="5 · --sf-color-semantic-success-5"><span>#F4FCEE</span></div>
+        <div class="sf-chip" style="background:#E9F5E3;color:rgba(20,20,20,.8)" title="15 · --sf-color-semantic-success-15"><span>#E9F5E3</span></div>
+        <div class="sf-chip" style="background:#D1E8C0;color:rgba(20,20,20,.8)" title="20 · --sf-color-semantic-success-20"><span>#D1E8C0</span></div>
+        <div class="sf-chip" style="background:#69BD45;color:rgba(255,255,255,.92)" title="100 · --sf-color-semantic-success-100"><span>#69BD45</span></div>
+        <div class="sf-chip" style="background:#3C7212;color:rgba(255,255,255,.92)" title="SUCCESS · --sf-color-semantic-success-base"><span>#3C7212</span></div>
+      </div></div>
+    <div class="ds-row"><div class="sc-info"><h4>Info</h4><p>Info colors communicate a neutral, informational message or a helpful hint. They are used for tips, notices and non-urgent status updates.</p></div>
+      <div class="ds-grid">
+        <div class="sf-chip" style="background:#EDF7FC;color:rgba(20,20,20,.8)" title="5 · --sf-color-semantic-info-5"><span>#EDF7FC</span></div>
+        <div class="sf-chip" style="background:#A1D6F0;color:rgba(20,20,20,.8)" title="20 · --sf-color-semantic-info-20"><span>#A1D6F0</span></div>
+        <div class="sf-chip" style="background:#176C97;color:rgba(255,255,255,.92)" title="INFO · --sf-color-semantic-info-base"><span>#176C97</span></div>
+      </div></div>
+  </div>
+</div>
+<div class="proj-section">
+  <div class="ds-section">
+    <div class="ds-title">Typography</div>
+    <p class="ds-intro">A constrained, purposeful set of typographic styles mapped to functional roles, bilingual across Latin and Arabic scripts.</p>
+    <div class="ds-type-row">
+      <div class="lbl">Primary · English</div>
+      <div class="ds-type-name" style="font-family:'Outfit',sans-serif">Outfit</div>
+      <div class="ds-type-spec" style="font-family:'Outfit',sans-serif">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789</div>
+    </div>
+    <div class="ds-type-row">
+      <div class="lbl">Secondary · English</div>
+      <div class="ds-type-name" style="font-family:'DM Sans',sans-serif">Proxima Nova</div>
+      <div class="ds-type-spec" style="font-family:'DM Sans',sans-serif">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789</div>
+    </div>
+    <div class="ds-type-row">
+      <div class="lbl">Arabic</div>
+      <div class="ds-type-name" style="font-family:'DM Sans',sans-serif">URW Geometric Arabic</div>
+      <div class="ds-type-spec" style="font-family:'DM Sans',sans-serif">ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي ٩٨٧٦٥٤٣٢١٠</div>
+    </div>
+  </div>
+</div>
+<div class="proj-section">
+  <div class="img-grid cols-1 dyn" style="--rh:220px">
+    <img style="grid-column:span 1;grid-row:span 2" src="images/sixflags/02.jpeg" loading="lazy" alt="">
+  </div>
+</div>
+    <div class="proj-section">
+      <h3>Mobile App — Tickets &amp; Checkout</h3>
+      <div class="proj-desc">
+        <p>The app concentrates on the highest-intent journey: choosing a day, picking ticket types and add-ons for the six lands, and paying. The checkout was designed for one-handed use, with local payment methods and full Arabic RTL support.</p>
+      </div>
+      <div class="img-grid cols-3">
+        ${im(B+'/mobile/tickets-1','9/16',2)}
+        ${im(B+'/mobile/tickets-2','9/16',4)}
+        ${im(B+'/mobile/tickets-3','9/16',6)}
+        ${im(B+'/mobile/checkout-1','9/16',1)}
+        ${im(B+'/mobile/checkout-2','9/16',3)}
+        ${im(B+'/mobile/checkout-3','9/16',5)}
+      </div>
+    </div>
+    <div class="proj-section">
+      <h3>Website</h3>
+      <div class="proj-desc">
+        <p>The website covers the home experience — an introduction to the six lands and signature rides like Falcon's Flight — plus ticketing, checkout and the My Profile dashboard where visitors manage tickets, bookings and personal details. Each template was designed for every breakpoint and mirrored for RTL.</p>
+      </div>
+      <div class="img-grid cols-2">
+        ${im(B+'/web/home','16/10',2)}
+        ${im(B+'/web/tickets','16/10',4)}
+        ${im(B+'/web/checkout','16/10',6)}
+        ${im(B+'/web/dashboard','16/10',1)}
+      </div>
+    </div>
+    <div class="proj-section">
+      <h3>Breakpoints &amp; RTL</h3>
+      <div class="proj-desc">
+        <p>Layouts were defined across the full breakpoint range, from small mobile to widescreen. The right-to-left adaptation went beyond mirroring: reading order, gestures, number formatting, date pickers and imagery direction were reviewed specifically for the Saudi audience.</p>
+      </div>
+      ${im(B+'/rtl-breakpoints','16/7',4)}
+    </div>`;
+}
+
+/* runtime image resolver: if a root-level images/<proj>/<file> 404s, retry in known subfolders */
+const IMG_SUBDIRS = ['hero','wire','lands','mobile','web','cards','patterns','graphic elements','ds','flow','design-system','graphic-elements'];
+document.addEventListener('error', e => {
+  const img = e.target;
+  if(!(img && img.tagName === 'IMG')) return;
+  const src = img.getAttribute('src') || '';
+  const m = src.match(/^(images\/[^\/]+\/)([^\/]+)$/); // root-level file inside a project folder
+  if(!m) return;
+  let i = +(img.dataset.tryIdx || 0);
+  if(i >= IMG_SUBDIRS.length) return;
+  img.dataset.tryIdx = i + 1;
+  img.src = m[1] + IMG_SUBDIRS[i] + '/' + m[2];
+}, true);
+function escAttr(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
+function fitFrame(f){ try{ const d=f.contentWindow.document; const h=Math.max(d.documentElement.scrollHeight,d.body?d.body.scrollHeight:0); f.style.height=(h+2)+'px'; }catch(e){} }
+/* scale-fit: keep desktop layout on mobile, shrink the whole section proportionally (like an image) */
+function applyScaleFit(){
+  const pc = document.getElementById('projectContent'); if(!pc) return;
+  pc.querySelectorAll('.proj-section.scale-fit').forEach(sec=>{
+    sec.style.zoom=''; sec.style.width='';
+    const dw = parseFloat(sec.dataset.dw) || 1120;
+    const avail = pc.clientWidth;
+    if(avail && avail < dw){ sec.style.width = dw+'px'; sec.style.zoom = (avail/dw); }
+  });
+}
+window.addEventListener('resize', applyScaleFit);
+window.addEventListener('load', applyScaleFit);
+window.addEventListener('resize',()=>document.querySelectorAll('iframe.embed-frame').forEach(fitFrame));
+/* maps each project title to the key used inside its *-content.js file */
+const CONTENT_SLUGS = {
+  'Colablearn | UX/UI':'colablearn',
+  'Kayanee | Brand & Digital':'kayanee',
+  'MercadoLibre | UX/UI':'mercadolibre',
+  'SmartHome UX/UI':'smarthome',
+  'Nulinga | Design System':'nulinga',
+  'LIA Aerospace | Styleguide':'lia-aerospace',
+  'AFC | Asian Football Cup':'afc',
+  'Google | Growth Summit':'google-growth-summit',
+  'Lemon | Brand Identity':'lemon',
+  'Bahamas | Identity':'bahamas',
+  'Disney Junior | Logo':'disney-junior',
+  'NatGeo Kids | Xmas':'natgeo-kids-xmas',
+  'Kikely Brand | Styleguide':'kikely',
+  'Nike | by You':'nike-by-you',
+  'Nike SB | Green Power':'nike-sb-green-power',
+  'GSW | Champions 22':'gsw-champions-22',
+  'Mareth | Restaurant':'mareth',
+  'Disney Channel | Logo':'disney-channel'
+};
+/* flat project order (grid order: ux then design) for prev/next navigation */
+const FLAT = (() => { const L = []; ['ux','design'].forEach(k => (PROJECTS[k]||[]).forEach((p,i) => L.push([k,i]))); return L; })();
+/* per-project bottom white space: add more, or trim it down */
+const EXTRA_BOTTOM = new Set(['lemon','natgeo-kids-xmas','nulinga','bahamas','gsw-champions-22']);
+const LESS_BOTTOM  = new Set(['disney-junior','mareth','disney-channel']);
+/* projects where every section should be full width */
+const FULLWIDTH_ALL = new Set(['google-growth-summit','lia-aerospace']);
+function openProject(key, idx){
+  const p = PROJECTS[key][idx];
+  /* wire the bottom prev / next arrows */
+  const fi = FLAT.findIndex(e => e[0] === key && e[1] === idx);
+  if(fi >= 0){
+    const prev = FLAT[(fi - 1 + FLAT.length) % FLAT.length], next = FLAT[(fi + 1) % FLAT.length];
+    const pv = document.getElementById('pnPrev'), nx = document.getElementById('pnNext');
+    if(pv) pv.onclick = () => openProject(prev[0], prev[1]);
+    if(nx) nx.onclick = () => openProject(next[0], next[1]);
+  }
+  const applyPageStyle = slug => {
+    const C = window.AQ_CONTENT || {};
+    const panel = document.getElementById('panel-project');
+    const custom = C[slug+'_bg'];
+    panel.style.background = custom || '';                 // '' -> CSS light grey (side margins)
+    const pc = document.getElementById('projectContent');
+    pc.style.background = custom ? 'transparent' : '';     // no custom colour -> white page (CSS), sides grey
+    pc.style.maxWidth = (C[slug+'_w'] || 1000) + 'px';     // default project page width 1000 (matches the editor)
+    const pad = (C[slug+'_pad'] != null) ? C[slug+'_pad'] : 38;
+    pc.style.setProperty('--pgpad', pad + 'px');
+    pc.style.paddingLeft = pad + 'px'; pc.style.paddingRight = pad + 'px';   // page inner margin (normal sections)
+    pc.classList.toggle('op-pad-more', EXTRA_BOTTOM.has(slug));
+    pc.classList.toggle('op-pad-less', LESS_BOTTOM.has(slug));
+    pc.classList.toggle('op-all-fw', FULLWIDTH_ALL.has(slug));
+    panel.style.paddingLeft = '0'; panel.style.paddingRight = '0';
+  };
+  if(p.slug === 'aquarabia'){ applyPageStyle('aquarabia'); renderAquarabia(); show('project'); return; }
+  if(p.slug === 'sixflags'){ applyPageStyle('sixflags'); renderSixflags(); show('project'); return; }
+  /* generic: render the HTML saved in the project's *-content.js (window.AQ_CONTENT[slug]) */
+  {
+    const slug = p.slug || CONTENT_SLUGS[p.title];
+    const C = window.AQ_CONTENT || {};
+    if(slug && C[slug]){
+      applyPageStyle(slug);
+      const rolesHtml = [p.year, ...p.roles].map((r,i) => (i ? '<span class="sep"></span>' : '') + `<span>${r}</span>`).join('');
+      document.getElementById('projectContent').innerHTML =
+        `<div class="proj-head"><h2>${fmtTitle(p.title)}</h2><div class="roles">${rolesHtml}</div></div>` + C[slug];
+      show('project');
+      applyScaleFit();
+      return;
+    }
+  }
+  { const panel = document.getElementById('panel-project'); panel.style.background = ''; panel.style.paddingLeft = '0'; panel.style.paddingRight = '0'; const pc = document.getElementById('projectContent'); pc.style.maxWidth = '1000px'; pc.style.background = ''; pc.style.setProperty('--pgpad','38px'); pc.style.paddingLeft = '38px'; pc.style.paddingRight = '38px'; pc.classList.remove('op-pad-more','op-pad-less','op-all-fw'); }
+  const meta = [p.year, ...p.roles];
+  const roles = meta.map((r,i) => (i ? '<span class="sep"></span>' : '') + `<span>${r}</span>`).join('');
+  let html = `
+    <div class="proj-head">
+      <h2>${fmtTitle(p.title)}</h2>
+      <div class="roles">${roles}</div>
+    </div>
+    <img class="hero-img" src="${p.hero}" alt="${p.title}">
+    <div class="proj-desc"><p>${p.desc}</p></div>`;
+  const resolve = u => (u.startsWith('http') || u.startsWith('images/')) ? u : R(u);
+  const imgGrid = sec => {
+    if(!sec.imgs || !sec.imgs.length) return '';
+    const rad = sec.radius ? `border-radius:${sec.radius}px;` : '';
+    const shVal = `box-shadow:0 ${sec.shDist==null?8:sec.shDist}px ${sec.shBlur==null?24:sec.shBlur}px rgba(0,0,0,${sec.shOp==null?0.15:sec.shOp});`;
+    const shOf = o => ((o && o.shadow!=null) ? o.shadow : sec.shadow) ? shVal : '';
+    const stk = sec.stroke ? sec.stroke + ';' : '';
+    const S = sec.half ? 2 : 1;
+    const su = v => Math.max(1, Math.round((v||1)*S));
+    const dyn = sec.rowH || sec.half || sec.imgs.some(u => typeof u === 'object' && ((u.cw||1) != 1 || (u.rh||1) != 1 || u.sp));
+    const cell = u => { const o = typeof u === 'object' ? u : {src:u};
+      const span = dyn ? `grid-column:span ${su(o.cw)};grid-row:span ${su(o.rh)};` : '';
+      if(o.sp) return `<div style="${span}background:${o.bg||'#EDF7FC'};${rad}${shOf(o)}${o.bg!=='transparent'?stk:''}"></div>`;
+      const st = span + (o.fit ? `object-fit:${o.fit};` : '') + (o.bg ? `background:${o.bg};` : '') + rad + shOf(o) + stk;
+      return `<img${st ? ` style="${st}"` : ''} src="${resolve(o.src)}" loading="lazy" alt="${p.title}">`; };
+    const mc = sec.mobile === '1' ? ' m1' : (sec.mobile === '2' ? ' m2' : '');
+    const tpl = sec.half ? `grid-template-columns:repeat(${(sec.cols||1)*2},1fr);` : '';
+    const gstyle = (dyn||sec.half) ? ` style="${tpl}--rh:${Math.round((sec.rowH || 220)/S)}px"` : '';
+    return `<div class="img-grid cols-${sec.cols}${dyn ? ' dyn' : ''}${mc}"${gstyle}>` +
+      sec.imgs.map(cell).join('') + '</div>';
+  };
+  const fs = s => s ? ` style="font-size:${s}px"` : '';
+  const typo = o => { const s=[]; if(o.font)s.push('font-family:'+o.font); if(o.weight)s.push('font-weight:'+o.weight); if(o.size)s.push('font-size:'+o.size+'px'); if(o.align&&o.align!=='left')s.push('text-align:'+o.align); if(o.lh)s.push('line-height:'+o.lh); if(o.color)s.push('color:'+o.color); return s.join(';'); };
+  (p.sections || []).forEach(sec => {
+    if(sec.spacer){
+      const s = [`height:${sec.height||60}px`];
+      if(sec.bg) s.push(`background:${sec.bg}`);
+      if(sec.radius) s.push(`border-radius:${sec.radius}px`);
+      html += `<div class="proj-section" style="${s.join(';')}"></div>`;
+      return;
+    }
+    const secStyled = sec.bg || sec.border;
+    const bgAttr = secStyled ? ` style="${sec.bg?`background:${sec.bg};`:''}${sec.border?`${sec.border};`:''}${sec.pad!=null?`--secpad:${sec.pad}px`:''}"` : '';
+    let inner;
+    if(sec.persona){
+      const P = sec.persona; const S = P.style||{}, C = P.col||{};
+      const sy = g => { const s=typo(S[g]||{}); return s?` style="${s}"`:''; };
+      const av2=[]; if(C.bgTop)av2.push(`--apbg:${C.bgTop}`); if(C.bgBot)av2.push(`--apbg2:${C.bgBot}`); if(C.accent)av2.push(`--pk:${C.accent}`); if(C.ava)av2.push(`--ava:${C.ava}`); if(C.borderW>0)av2.push(`border:${C.borderW}px solid ${C.borderC||'#e0d3f2'}`); if(C.radius!=null)av2.push(`border-radius:${C.radius}px`);
+      const aps = av2.length?` style="${av2.join(';')}"`:'';
+      const pills = (P.pills||[]).map(x=>`<div><span class="ap__pilllbl"${sy('pilllbl')}>${x.k}</span><span class="ap__pill"${sy('pill')}>${x.v}</span></div>`).join('');
+      const av = (P.people||[]).map(x=>`<div class="ap__ava">${x.img?`<img src="${resolve(x.img)}" alt="" onerror="this.remove()">`:''}<span>${x.ini||''}</span></div>`).join('');
+      const names = (P.people||[]).map(x=>`<div class="ap__person"><h4${sy('name')}>${x.name}</h4><span class="ap__age"${sy('age')}>${x.age}</span><p${sy('desc')}>${x.desc}</p></div>`).join('');
+      const cards = (P.barriers||[]).map(x=>`<div class="ap__card"><span class="ap__card-lbl"${sy('cardlbl')}>${x.k}</span><p${sy('cardtxt')}>${x.v}</p></div>`).join('');
+      const ints = (P.interests||[]).map(t=>`<div class="ap__int"><span class="ap__int-ico"></span><p${sy('intr')}>${t}</p></div>`).join('');
+      inner = `<div class="ap"${aps}><div class="ap__top"><div class="ap__intro"><p class="ap__eyebrow"${sy('eyebrow')}>${P.eyebrow||''}</p><h2 class="ap__title"${sy('title')}>${P.title||''}</h2><p class="ap__sub"${sy('sub')}>${P.sub||''}</p><div class="ap__pills">${pills}</div></div><div class="ap__people"><div class="ap__avatars">${av}</div><div class="ap__names">${names}</div></div></div><div class="ap__bottom"><div><h3 class="ap__h3"${sy('h3')}>${P.barTitle||''}</h3><div class="ap__cards">${cards}</div></div><div><h3 class="ap__h3"${sy('h3')}>${P.intTitle||''}</h3><div class="ap__intgrid">${ints}</div></div></div></div>`;
+    } else if(sec.palette){
+      const pal = sec.palette;
+      const pt=typo(pal.tt||{}), pi=typo(pal.ti||{}), pn=typo(pal.tn||{}), pd=typo(pal.td||{});
+      inner = `<div class="ds-section"><div class="ds-title"${pt?` style="${pt}"`:''}>${pal.title}</div>` +
+        (pal.intro ? `<p class="ds-intro"${pi?` style="${pi}"`:''}>${pal.intro}</p>` : '') +
+        (pal.rows || []).map(r => sfRow(r.name, r.desc, (r.sw || []).map(s => ({aa:'', hex:s.hex, hsla:'', tag:s.tag, token:s.token})), pn, pd)).join('') +
+        '</div>';
+    } else if(sec.typo){
+      const t = sec.typo;
+      inner = `<div class="ds-section"><div class="ds-title">${t.title}</div>` +
+        (t.intro ? `<p class="ds-intro">${t.intro}</p>` : '') +
+        (t.rows || []).map(r => `<div class="ds-type-row"><div class="lbl">${r.lbl}</div><div class="ds-type-name" style="font-family:${r.font}">${r.name}</div><div class="ds-type-spec" style="font-family:${r.font}">${r.spec}</div></div>`).join('') +
+        '</div>';
+    } else if(sec.cols2){
+      const cell = c => c.type === 'title'
+        ? `<h3 style="${typo(c)}${c.span===2?';grid-column:span 2':''}">${c.value}</h3>`
+        : `<div class="proj-desc"${c.span===2?' style="grid-column:span 2"':''}><p style="${typo(c)}">${c.value}</p></div>`;
+      const c2s=[]; if(sec.ratio&&sec.ratio!=='1fr 1fr')c2s.push(`grid-template-columns:${sec.ratio}`); if(sec.colGap!=null)c2s.push(`gap:${sec.colGap}px`);
+      inner = `<div class="proj-cols2"${c2s.length?` style="${c2s.join(';')}"`:''}>${sec.cols2.map(cell).join('')}</div>`;
+    } else if(sec.grid){
+      const g = sec.grid;
+      const GS = g.half ? 2 : 1;
+      const gsu = v => Math.max(1, Math.round((v||1)*GS));
+      const ct = (c,w) => typo({ font:c[w+'Font'], weight:c[w+'Weight'], size:(w==='t'?c.ts:c.xs), align:c[w+'Align'], lh:c[w+'Lh'] });
+      const gstk = g.stroke ? ';' + g.stroke : '';
+      const card = c => {
+        const spanS = `grid-column:span ${gsu(c.cw)};grid-row:span ${gsu(c.rh)}`;
+        if(c.empty) return `<div class="gcard" style="${spanS}${c.bg?`;background:${c.bg}${gstk}`:''}"></div>`;
+        const body = c.img
+          ? `<img src="${resolve(c.img)}" style="object-fit:${c.fit||'cover'}" loading="lazy" alt="${p.title}">`
+          : (c.t ? `<h3 style="${ct(c,'t')}">${c.t}</h3>` : '') + (c.x ? `<p style="${ct(c,'x')}">${c.x}</p>` : '');
+        return `<div class="gcard${c.img?' has-img':''}" style="${spanS}${c.bg?`;background:${c.bg}`:''}${(c.img||c.bg)?gstk:''}">${body}</div>`; };
+      const gtc = g.tmpl ? g.tmpl.trim().split(/\s+/).map(n=>(parseFloat(n)||1)+'fr').join(' ') : `repeat(${(g.cols||1)*GS},1fr)`;
+      const gmc = g.mobile === '1' ? ' m1' : (g.mobile === '2' ? ' m2' : '');
+      inner = `<div class="content-grid${gmc}" style="--rh:${Math.round((g.rowH||160)/GS)}px;grid-template-columns:${gtc}">${(g.cards||[]).map(card).join('')}</div>`;
+    } else if(sec.html){
+      inner = `<iframe class="embed-frame" onload="fitFrame(this)"${sec.radius?` style="border-radius:${sec.radius}px"`:''} srcdoc="${escAttr(sec.html)}"></iframe>`;
+    } else {
+      const lbl = sec.label ? `${sec.eyebrow?`<p class="ed-eyebrow">${sec.eyebrow}</p>`:''}<h3 style="${typo(sec)}">${sec.label}</h3>` : '';
+      const txt = sec.text ? `<div class="proj-desc"><p style="${typo(sec)}">${sec.text}</p></div>` : '';
+      inner = lbl + txt + imgGrid(sec);
+    }
+    const noHead = !sec.label && !sec.cols2 && !sec.palette && !sec.typo && !sec.grid && !sec.html && !sec.persona;
+    const secFW = (sec.mobile === '1' || (sec.grid && sec.grid.mobile === '1') || (sec.persona && sec.persona.mobileFull)) ? ' mfw' : '';
+    const sfCls = sec.scaleFit ? ' scale-fit' : '';
+    const sfAttr = sec.scaleFit ? ` data-dw="${sec.dw||1120}"` : '';
+    html += `<div class="proj-section${secStyled ? ' hasbg' : ''}${noHead ? ' cont' : ''}${secFW}${sfCls}"${bgAttr}${sfAttr}>${inner}</div>`;
+  });
+  document.getElementById('projectContent').innerHTML = html;
+  show('project');
+  applyScaleFit();
+}
+
+document.querySelectorAll('.thumb').forEach(t =>
+  t.addEventListener('click', () => openProject(t.dataset.key, +t.dataset.idx)));
+document.getElementById('backLink').addEventListener('click', () => show('home'));
+
+/* preview mode: editor opens index.html#preview with content stashed in localStorage */
+if(location.hash.slice(1).split(/[?&]/)[0] === 'preview'){
+  try{
+    let d = null;
+    try{ d = JSON.parse(localStorage.getItem('__aqPreview') || 'null'); }catch(e){}
+    if((!d || !d.html) && window.name && window.name.indexOf('AQPV:') === 0){
+      try{ d = JSON.parse(decodeURIComponent(window.name.slice(5))); }catch(e){}
+    }
+    d = d || {};
+    if(d.html){
+      const pc = document.getElementById('projectContent');
+      const panel = document.getElementById('panel-project');
+      pc.innerHTML = d.html;
+      panel.style.background = d.bg || '';
+      pc.style.background = d.bg ? 'transparent' : '';
+      pc.style.maxWidth = (d.w || 1000) + 'px';
+      { const pad = (d.pad != null) ? d.pad : 38; pc.style.setProperty('--pgpad', pad+'px'); pc.style.paddingLeft = pad + 'px'; pc.style.paddingRight = pad + 'px'; panel.style.paddingLeft = '0'; panel.style.paddingRight = '0'; }
+      show('project');
+      applyScaleFit();
+      document.querySelectorAll('#projectContent iframe.embed-frame').forEach(f => { try{ if(f.contentDocument && f.contentDocument.readyState==='complete') fitFrame(f); }catch(e){} });
+    }
+  }catch(e){}
+}
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<!-- ===== One-page behaviours: date+temp, hero hover-weight, parallax, about reveal, falling service pills, email ===== -->
+<script>
+(function(){
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* --- Madrid date + live temperature --- */
+  const dateEl = document.getElementById('heroDate');
+  if (dateEl){
+    try{
+      dateEl.textContent = new Intl.DateTimeFormat('en-GB', {
+        timeZone:'Europe/Madrid', weekday:'long', day:'numeric', month:'long', year:'numeric'
+      }).format(new Date());
+    }catch(e){ dateEl.textContent = new Date().toDateString(); }
+  }
+  const tempEls = [document.getElementById('heroTemp'), document.getElementById('opTemp')].filter(Boolean);
+  function updTemp(){
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=40.4168&longitude=-3.7038&current=temperature_2m')
+      .then(r => r.json())
+      .then(d => { const t = d && d.current && d.current.temperature_2m;
+                   if (t != null) tempEls.forEach(el => el.textContent = Math.round(t) + '°'); })
+      .catch(() => {});
+  }
+  if (tempEls.length){ updTemp(); setInterval(updTemp, 15 * 60 * 1000); }
+
+  const yEl = document.getElementById('footYear'); if (yEl) yEl.textContent = new Date().getFullYear();
+
+  /* --- Footer email spelled letter by letter (mailto links) --- */
+  const EMAIL = 'rocioabad.m@gmail.com';
+  const box = document.getElementById('emailLetters');
+  if (box){
+    for (const ch of EMAIL){
+      const a = document.createElement('a');
+      a.href = 'mailto:' + EMAIL; a.textContent = ch;
+      a.setAttribute('aria-label', 'email — ' + ch);
+      box.appendChild(a);
+    }
+  }
+
+  /* --- About: words darken as you scroll through the section --- */
+  const HL = new Set(['madrid-based','graphic','designer','branding','typography','web','design','18','years','experience','concepts','photography','architecture','urban','multidisciplinary','creativity']);
+  const allWords = [];
+  document.querySelectorAll('#about [data-words]').forEach(p => {
+    const toks = p.textContent.split(/(\s+)/);
+    p.textContent = '';
+    toks.forEach(tok => {
+      if (/^\s+$/.test(tok) || tok === ''){ p.appendChild(document.createTextNode(tok)); return; }
+      const s = document.createElement('span'); s.className = 'w'; s.textContent = tok;
+      const clean = tok.toLowerCase().replace(/[^a-z0-9-]/g,'');
+      if (HL.has(clean)) s.classList.add('hl');
+      p.appendChild(s); allWords.push(s);
+    });
+  });
+  const about = document.getElementById('about');
+  function paintAbout(){
+    if (!about || !allWords.length) return;
+    const r = about.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const prog = (vh * 0.82 - r.top) / (r.height * 0.72);
+    const n = Math.round(Math.min(Math.max(prog, 0), 1) * allWords.length);
+    for (let i = 0; i < allWords.length; i++) allWords[i].classList.toggle('on', i < n);
+  }
+  if (reduce) allWords.forEach(w => w.classList.add('on'));
+
+  /* --- Section fade-up reveal --- */
+  if ('IntersectionObserver' in window && !reduce){
+    document.querySelectorAll('.op-sec > *, #foot .foot-in > *').forEach(el => el.classList.add('sfade'));
+    const io = new IntersectionObserver((es) => {
+      es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.sfade').forEach(el => io.observe(el));
+  }
+
+  /* --- Hero name: per-letter weight morph on hover (Bricolage is variable) --- */
+  const heroName = document.querySelector('#hero .hero-name');
+  if (heroName){
+    const letterEls = [];
+    heroName.querySelectorAll('span').forEach(word => {
+      const txt = word.textContent; word.textContent = '';
+      for (const ch of txt){
+        const s = document.createElement('span'); s.className = 'l'; s.textContent = ch;
+        word.appendChild(s); letterEls.push(s);
+      }
+    });
+    // size the name so it fills the full width of the hero
+    function fitHero(){
+      heroName.style.fontSize = '100px';
+      const hero = document.getElementById('hero');
+      const avail = hero.clientWidth;   // fill the full width (no side padding)
+      const w = heroName.scrollWidth || 1;
+      heroName.style.fontSize = Math.max(24, 100 * avail / w) + 'px';
+    }
+    fitHero();
+    window.addEventListener('load', fitHero);
+    window.addEventListener('resize', fitHero);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHero);
+
+    let hx = -9999, hy = -9999, hover = false;
+    heroName.addEventListener('mousemove', e => { hx = e.clientX; hy = e.clientY; hover = true; });
+    heroName.addEventListener('mouseleave', () => { hover = false; });
+    (function morph(){
+      const R = Math.max(120, heroName.getBoundingClientRect().height * 0.55);
+      for (const el of letterEls){
+        if (!hover){ el.style.fontVariationSettings = "'wght' 600"; el.style.fontWeight = 600; continue; }
+        const r = el.getBoundingClientRect();
+        const d = Math.hypot(hx - (r.left+r.width/2), hy - (r.top+r.height/2));
+        const f = Math.min(Math.max(1 - d/R, 0), 1);
+        const w = 300 + (800 - 300) * f;
+        el.style.fontVariationSettings = "'wght' " + w; el.style.fontWeight = w;
+      }
+      requestAnimationFrame(morph);
+    })();
+  }
+
+  /* --- Parallax on scroll (subtle) --- */
+  const pxEls = [];
+  const addPx = (sel, speed) => { const el = document.querySelector(sel); if (el) pxEls.push({ el, speed }); };
+  addPx('#hero .hero-name', -0.18);
+  addPx('#hero .hero-meta', -0.06);
+  addPx('#next .next-lead', 0.10);
+  addPx('#foot .foot-lead', 0.08);
+  function parallax(){
+    if (reduce) return;
+    const vh = window.innerHeight;
+    for (const { el, speed } of pxEls){
+      const r = el.getBoundingClientRect();
+      const mid = r.top + r.height/2 - vh/2;
+      el.style.transform = `translate3d(0,${(mid*speed).toFixed(1)}px,0)`;
+    }
+  }
+
+  /* --- Services: falling physics pills (Matter.js) --- */
+  function initPills(){
+    const wrap = document.getElementById('svcFall');
+    if (!wrap || typeof Matter === 'undefined') return;
+    const SERVICES = ['Art Direction','UX / UI Design','Branding','Visual Identity','Typography','Web Design','Design Systems','Editorial Design','Motion Design','Packaging','Illustration','Agile / Design Ops','SEO Optimization','Research','Benchmarking','Component Library','E-commerce','Mobile App','Prototyping','Content Strategy','Performance Optimization','Logos','Systems','Styleguide','Brandguide','Figma','Flow','User Persona'];
+    const { Engine, World, Bodies, Runner, Mouse, MouseConstraint, Body } = Matter;
+    let started = false, engine, runner, raf, drawing = false, pills = [];
+
+    function drawFrame(){
+      let allSleep = pills.length > 0;
+      for (const p of pills){
+        const { x, y } = p.body.position;
+        p.el.style.transform = `translate(${(x - p.w/2).toFixed(1)}px, ${(y - p.h/2).toFixed(1)}px) rotate(${p.body.angle}rad)`;
+        if (!p.body.isSleeping) allSleep = false;
+      }
+      if (allSleep){ drawing = false; if (runner) Runner.stop(runner); return; }  // settled → free the CPU
+      raf = requestAnimationFrame(drawFrame);
+    }
+    function startDraw(){ if (!drawing){ drawing = true; drawFrame(); } }
+    function stopDraw(){ drawing = false; if (raf) cancelAnimationFrame(raf); }
+
+    function start(){
+      if (started) return;
+      const W = wrap.clientWidth, H = wrap.clientHeight;
+      if (W <= 0 || H <= 0) return;
+      started = true;
+      engine = Engine.create({ enableSleeping:true }); engine.world.gravity.y = 1;
+      const opt = { isStatic:true, render:{visible:false} };
+      const floor = Bodies.rectangle(W/2, H+30, W+200, 60, opt);
+      const left  = Bodies.rectangle(-30, H/2, 60, H*2.4, opt);
+      const right = Bodies.rectangle(W+30, H/2, 60, H*2.4, opt);
+      pills = SERVICES.map((label, i) => {
+        const el = document.createElement('div'); el.className = 'svc-pill'; el.textContent = label;
+        wrap.appendChild(el);
+        const w = el.offsetWidth, h = el.offsetHeight;
+        const x = 60 + Math.random() * Math.max(1, W - 120);
+        const y = -110 - i * 58 - Math.random()*70;
+        const body = Bodies.rectangle(x, y, w, h, { chamfer:{radius:h/2}, restitution:.4, friction:.4, frictionAir:.015 });
+        Body.setAngularVelocity(body, (Math.random()-.5)*.05);
+        return { el, body, w, h };
+      });
+      World.add(engine.world, [floor, left, right, ...pills.map(p => p.body)]);
+      /* no MouseConstraint — pills are purely a falling animation so nothing traps page scroll */
+      runner = Runner.create();
+      Runner.run(runner, engine);
+      startDraw();
+    }
+
+    // start when in view, and pause physics + drawing when scrolled away (keeps scroll smooth)
+    if ('IntersectionObserver' in window){
+      const io = new IntersectionObserver((es) => {
+        es.forEach(e => {
+          if (e.isIntersecting){
+            if (!started) start();
+            else if (runner){ Runner.run(runner, engine); startDraw(); }
+          } else {
+            if (runner) Runner.stop(runner);
+            stopDraw();
+          }
+        });
+      }, { threshold: 0 });
+      io.observe(document.getElementById('services'));
+    } else { start(); }
+  }
+  initPills();
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking){ requestAnimationFrame(() => { paintAbout(); parallax(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+  window.addEventListener('resize', () => { paintAbout(); parallax(); });
+  window.addEventListener('load', () => { paintAbout(); parallax(); });
+  paintAbout(); parallax();
+})();
+</script>
+</body>
+</html>
