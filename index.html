@@ -746,8 +746,9 @@ body,.prose,.prose p,.op-sec,.op-topbar,.svc-list li{font-family:'Bricolage Grot
 
 <script>
 /* ================= data ================= */
-const SQ = 'https://images.squarespace-cdn.com/content/v1/64da91dc95d975023fb563f2/';
-const R = pth => 'https://www.rocioabad.com/_next/image?url=' + encodeURIComponent('/images/' + pth) + '&w=1920&q=75';
+/* images are served locally now — no Squarespace / rocioabad.com dependency */
+const SQ = 'images/';
+const R = pth => 'images/' + pth;
 
 const AQUARABIA = {
   title:'Aquarabia', slug:'aquarabia', year:'2025',
