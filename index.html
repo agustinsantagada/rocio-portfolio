@@ -288,7 +288,7 @@ body.in-section .burger{opacity:1;pointer-events:auto;}
 
 /* ---------- project detail ---------- */
 /* home link: "Rocío Abad", centred at the very top, scrolls away with the page */
-.back-wrap{position:absolute;top:clamp(60px,9vh,120px);left:0;right:0;z-index:60;display:flex;justify-content:center;pointer-events:none;max-width:none;margin:0;}
+.back-wrap{position:absolute;top:0;left:0;right:0;height:clamp(150px,18vh,240px);z-index:60;display:flex;align-items:center;justify-content:center;pointer-events:none;max-width:none;margin:0;}
 .back{
   pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;margin:0;
   font-family:var(--title);font-weight:600;text-transform:none;
@@ -513,7 +513,17 @@ body,.prose,.prose p,.op-sec,.op-topbar,.svc-list li{font-family:'Bricolage Grot
 .op-eyebrow{font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 clamp(30px,5vh,60px);}
 
 /* ---- ABOUT (black bg, big "Hi", light text, scroll word reveal) ---- */
-#about{background:#0d0d0d;color:#fff;padding-top:clamp(140px,22vh,300px);padding-bottom:clamp(140px,22vh,300px);}
+#about{background:#0d0d0d;color:#fff;padding-top:clamp(140px,22vh,300px);padding-bottom:clamp(140px,22vh,300px);position:relative;}
+/* round holographic "design award" badge (opposite corner to "Hi,") */
+.award-badge{position:absolute;top:clamp(120px,17vh,250px);right:clamp(20px,5vw,84px);width:clamp(92px,10vw,142px);aspect-ratio:1;z-index:4;display:block;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.award-badge .ab-tilt{position:relative;width:100%;height:100%;transition:transform .18s ease-out;transform-style:preserve-3d;will-change:transform;}
+.ab-svg{width:100%;height:100%;display:block;filter:drop-shadow(0 12px 26px rgba(0,0,0,.45));}
+.ab-arc{font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.16em;fill:#5c4a22;}
+.ab-year{font-family:var(--mono);font-weight:700;font-size:10.5px;letter-spacing:.12em;fill:#6b5a2e;}
+.ab-sheen{position:absolute;inset:5px;border-radius:50%;overflow:hidden;mix-blend-mode:overlay;pointer-events:none;}
+.ab-sheen::before{content:'';position:absolute;inset:-45%;background:conic-gradient(from 0deg,hsl(358 100% 62%),hsl(30 100% 50%),hsl(60 100% 50%),hsl(96 100% 50%),hsl(233 85% 47%),hsl(271 85% 47%),hsl(300 20% 35%),hsl(358 100% 62%));filter:blur(9px);opacity:.5;animation:ab-rot 5s linear infinite;}
+@keyframes ab-rot{to{transform:rotate(360deg);}}
+@media(max-width:700px){.award-badge{width:76px;top:clamp(66px,10vh,104px);right:16px;}}
 #about .about-hi{
   font-family:var(--title);font-weight:700;color:#fff;
   font-size:clamp(64px,12vw,190px);line-height:.9;letter-spacing:-.03em;
@@ -569,7 +579,7 @@ body,.prose,.prose p,.op-sec,.op-topbar,.svc-list li{font-family:'Bricolage Grot
 
 /* ---- EXPERIENCE (white bg, contained in a card, compact type) ---- */
 #experience{background:#fff;color:#111;}
-#experience .xp-title{font-family:var(--title);font-weight:700;font-size:clamp(30px,4.6vw,64px);line-height:.95;letter-spacing:-.02em;margin:0 0 clamp(22px,3.5vh,40px);}
+#experience .xp-title{font-family:var(--title);font-weight:700;font-size:clamp(48px,9vw,150px);line-height:.9;letter-spacing:-.02em;margin:0 0 clamp(24px,4vh,50px);}
 .xp-list{
   padding:0;max-width:1100px;
 }
@@ -632,7 +642,7 @@ body,.prose,.prose p,.op-sec,.op-topbar,.svc-list li{font-family:'Bricolage Grot
   /* project detail: white (no grey), less top distance, bigger home link */
   #panel-project{background:#fff;}
   #projectContent{padding-top:clamp(60px,11vh,94px);}
-  .back-wrap{top:clamp(15px,3vh,24px);}
+  .back-wrap{height:clamp(56px,11vh,94px);}
   .back{font-size:22px;}
   /* keep page margins on mobile: no full-width break-out (text/content isn't cramped to the edge) */
   #projectContent .proj-section.op-fw,
@@ -658,6 +668,19 @@ body,.prose,.prose p,.op-sec,.op-topbar,.svc-list li{font-family:'Bricolage Grot
 
 <!-- ABOUT -->
 <section id="about" class="op-sec">
+  <a class="award-badge" href="#" aria-label="Design Award" title="Design Award" onclick="return false;">
+    <span class="ab-tilt">
+      <svg class="ab-svg" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><path id="abTop" d="M 23,75 A 52,52 0 0 1 127,75"/></defs>
+        <circle cx="75" cy="75" r="73" fill="#f3e3ac"/>
+        <circle cx="75" cy="75" r="66" fill="none" stroke="#b79b5e" stroke-width="1"/>
+        <text class="ab-arc"><textPath href="#abTop" startOffset="50%" text-anchor="middle">DESIGN · AWARD</textPath></text>
+        <path transform="translate(75,74)" d="M0,-16 L4.9,-4.9 L16,0 L4.9,4.9 L0,16 L-4.9,4.9 L-16,0 L-4.9,-4.9 Z" fill="#6b5a2e"/>
+        <text class="ab-year" x="75" y="112" text-anchor="middle">2024</text>
+      </svg>
+      <span class="ab-sheen"></span>
+    </span>
+  </a>
   <h2 class="about-hi">Hi,</h2>
   <p class="about-text" data-words>Madrid-based graphic designer, specialised in branding, typography and web design, with 20 years of professional experience. Inspired by strong but simply executed concepts, my expertise covers diverse work both in print and digital media for a wide-range of clients.</p>
   <p class="about-text" data-words>Passionate about photography, architecture, urban culture, forthcoming trends and multidisciplinary creativity.</p>
@@ -981,19 +1004,29 @@ function buildGrid(key){
   grid.innerHTML = html;
 }
 /* ================= WORK gallery (all projects, hover overlay, click = detail) ================= */
+/* custom display order for the work grid (unlisted projects keep their natural order after these) */
+const WORK_ORDER = ['Aquarabia','Six Flags Qiddiya','AFC | Asian Football Cup','Kayanee | Brand & Digital','Google | Growth Summit','Nulinga | Design System','Bahamas | Identity','NatGeo Kids | Xmas','Mareth | Restaurant'];
+function orderedProjects(){
+  const all = [];
+  ['ux','design'].forEach(k => (PROJECTS[k]||[]).forEach((p,i) => all.push([k,i])));
+  const titleOf = ([k,i]) => (PROJECTS[k][i].title || '');
+  return all
+    .map((e, orig) => ({ e, r: (WORK_ORDER.indexOf(titleOf(e)) >= 0 ? WORK_ORDER.indexOf(titleOf(e)) : 1000 + orig) }))
+    .sort((a, b) => a.r - b.r)
+    .map(x => x.e);
+}
 function buildWork(){
   const grid = document.getElementById('workGrid');
   if(!grid) return;
   let html = '';
-  ['ux','design'].forEach(key => {
-    (PROJECTS[key] || []).forEach((p, idx) => {
-      const t = fmtTitle(p.title);
-      const meta = [p.year, ...(p.roles || [])].filter(Boolean).slice(0,2).join(' · ');
-      html += `<button class="work-item" type="button" data-key="${key}" data-idx="${idx}" aria-label="${(p.title||'').replace(/"/g,'&quot;')}">
-        <div class="work-media" style="${bg(p.thumb || '')}"></div>
-        <div class="work-ov"><span class="work-t">${t}</span><span class="work-m">${meta}</span></div>
-      </button>`;
-    });
+  orderedProjects().forEach(([key, idx]) => {
+    const p = PROJECTS[key][idx];
+    const t = fmtTitle(p.title);
+    const meta = [p.year, ...(p.roles || [])].filter(Boolean).slice(0,2).join(' · ');
+    html += `<button class="work-item" type="button" data-key="${key}" data-idx="${idx}" aria-label="${(p.title||'').replace(/"/g,'&quot;')}">
+      <div class="work-media" style="${bg(p.thumb || '')}"></div>
+      <div class="work-ov"><span class="work-t">${t}</span><span class="work-m">${meta}</span></div>
+    </button>`;
   });
   grid.innerHTML = html;
   grid.querySelectorAll('.work-item').forEach(el =>
@@ -1712,7 +1745,7 @@ const CONTENT_SLUGS = {
   'Disney Channel | Logo':'disney-channel'
 };
 /* flat project order (grid order: ux then design) for prev/next navigation */
-const FLAT = (() => { const L = []; ['ux','design'].forEach(k => (PROJECTS[k]||[]).forEach((p,i) => L.push([k,i]))); return L; })();
+const FLAT = orderedProjects();   // prev/next follows the same custom order as the grid
 /* per-project bottom white space: add more, or trim it down */
 const EXTRA_BOTTOM = new Set(['lemon','natgeo-kids-xmas','nulinga','bahamas','gsw-champions-22']);
 const LESS_BOTTOM  = new Set(['disney-junior','mareth','disney-channel']);
@@ -2093,6 +2126,19 @@ if(location.hash.slice(1).split(/[?&]/)[0] === 'preview'){
     } else { start(); }
   }
   initPills();
+
+  /* --- Award badge: 3D tilt on hover --- */
+  const badge = document.querySelector('.award-badge');
+  if (badge){
+    const tilt = badge.querySelector('.ab-tilt');
+    badge.addEventListener('mousemove', e => {
+      const r = badge.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      tilt.style.transform = `perspective(600px) rotateY(${(px*24).toFixed(1)}deg) rotateX(${(-py*24).toFixed(1)}deg) scale(1.05)`;
+    });
+    badge.addEventListener('mouseleave', () => { tilt.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg) scale(1)'; });
+  }
 
   let ticking = false;
   window.addEventListener('scroll', () => {
